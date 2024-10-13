@@ -1,24 +1,15 @@
-Certainly! Here is how your entire Markdown file can be converted into an HTML file suitable for Reveal.js
-presentations:
-
-```html
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <title>Deconvolution of Spatial Transcriptomics using scRNA-seq</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dist/reset.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/black.css" id="theme">
-    <link rel="stylesheet" href="plugin/highlight/monokai.css">
 </head>
 
 <body>
-
     <div class="reveal">
         <div class="slides">
 
@@ -38,7 +29,7 @@ presentations:
             <section>
                 <h2>Structure of the Presentation</h2>
                 <ol>
-                    <li>Introduction to the <a href="#method-of-the-year-spatially-resolved-transcriptomics">spatial
+                    <li>Introduction to <a href="#method-of-the-year-spatially-resolved-transcriptomics">spatial
                             transcriptomics</a> and <a href="#single-cell-rna-sequencing-scrna-seq">scRNA-seq</a></li>
                     <li><a href="#deconvolution-methods">Deconvolution methods</a>: <a
                             href="#rctd-robust-cell-type-deconvolution">RCTD</a> and <a
@@ -46,63 +37,59 @@ presentations:
                     <li>Simulation study and real data application</li>
                 </ol>
             </section>
-
             <section>
-                <h2>Method of the Year: Spatially Resolved Transcriptomics</h2>
-                <div style="align-items: center;">
-                    <div style="text-align: center;">
-                        <img src="img/FFPE_Hero_V2_RGB.webp" style="width: 80%;">
-                        <p><small> </small></p>
+                <section>
+                    <h2>Method of the Year: Spatially Resolved Transcriptomics</h2>
+                    <div style="align-items: center;">
+                        <div style="text-align: center;">
+                            <img src="img/FFPE_Hero_V2_RGB.webp" style="width: 80%;">
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <h3>Spatial Transcriptomics Maps Gene Expression in Tissue</h3>
-                <div style="align-items: center;">
+                <section>
+                    <h3>Spatial Transcriptomics Maps Gene Expression in Tissue</h3>
                     <div>
                         <img src="img/sp_gene2loc.png">
                         <p style="text-align: center;"><small>Spatial transcriptomics combines the spatial information
-                                of tissue sections with the gene expression data from RNA sequencing.</small></p>
+                                of
+                                tissue sections with the gene expression data from RNA sequencing.</small></p>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <h3>Example: Mouse Hippocampus in 10x Visium</h3>
-                <div style="display: flex; align-items: center;">
-                    <div style="flex: 1; text-align: center;">
-                        <img src="img/sp_illu.png" style="width: 100%;">
-                        <p><small>Example of spatial transcriptomics</small></p>
+                <section>
+                    <h3>Example: Mouse Hippocampus in 10x Visium</h3>
+                    <div style="display: flex; align-items: center;">
+                        <div style="flex: 1; text-align: center;">
+                            <img src="img/sp_illu.png" style="width: 100%;">
+                            <p><small>Example of spatial transcriptomics</small></p>
+                        </div>
+                        <div style="flex: 1; text-align: center; margin-left: -40px;">
+                            <img src="img/sp_data.png" style="width: 50%;">
+                            <p><small>Structure of the spatial transcriptomics data</small></p>
+                        </div>
                     </div>
-                    <div style="flex: 1; text-align: center; margin-left: -40px;">
-                        <img src="img/sp_data.png" style="width: 50%;">
-                        <p><small>Structure of the spatial transcriptomics data</small></p>
-                    </div>
-                </div>
-                <p>The size of barcoded spots in Visium does not allow us to study gene expression in individual cells.
-                    With mixture cell types in spots, we cannot directly map the cell types to the spots.</p>
-            </section>
+                    <p>The size of barcoded spots in Visium does not allow us to study gene expression in individual
+                        cells.
+                        With mixture cell types in spots, we cannot directly map the cell types to the spots.</p>
+                </section>
 
-            <section>
-                <h3>Deconvolution: Mapping scRNA-seq to Spatial Transcriptomics</h3>
-                <div style="align-items: center;">
+                <section>
+                    <h3>Deconvolution: Mapping scRNA-seq to Spatial Transcriptomics</h3>
                     <div>
                         <img src="img/decov_illu.png">
                         <p style="text-align: center;"><small>Illustration of deconvolution process</small></p>
                     </div>
-                </div>
-                <p>With the reference scRNA-seq data, we can estimate the cell type composition in each spot of the
-                    spatial transcriptomics data.</p>
+                    <p>With the reference scRNA-seq data, we can estimate the cell type composition in each spot of the
+                        spatial transcriptomics data.</p>
+                </section>
             </section>
 
             <section>
                 <h2>Single-Cell RNA Sequencing (scRNA-seq)</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/sc_illu.png">
-                        <p style="text-align: center;"><small>Process of scRNA-seq and its data structure</small></p>
-                    </div>
+                <div>
+                    <img src="img/sc_illu.png">
+                    <p style="text-align: center;"><small>Process of scRNA-seq and its data structure</small></p>
                 </div>
             </section>
 
@@ -127,22 +114,17 @@ presentations:
 
             <section>
                 <h2>Summary on scRNA-seq and Spatial Transcriptomics</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/spsc_complex.png">
-                        <p style="text-align: center;"><small>Understanding the Complexity of Tissue with bulk RNA-seq,
-                                scRNA-seq, and spatial transcriptomics</small></p>
-                    </div>
+                <div>
+                    <img src="img/spsc_complex.png">
+                    <p style="text-align: center;"><small>Understanding the Complexity of Tissue with bulk RNA-seq,
+                            scRNA-seq, and spatial transcriptomics</small></p>
                 </div>
             </section>
 
             <section>
                 <h2>Insights from Deconvolution Results</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/sp_apply.png">
-                        <p style="text-align: center;"><small></small></p>
-                    </div>
+                <div>
+                    <img src="img/sp_apply.png">
                 </div>
                 <p>Integrating scRNA-seq and spatial transcriptomics data increase our understanding of the roles of
                     specific cell subpopulations and their interactions in development, homeostasis and disease.</p>
@@ -150,22 +132,18 @@ presentations:
 
             <section>
                 <h2>Deconvolution Methods</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/deconv.png">
-                        <p style="text-align: center;"><small>Estimated cell abundances (color intensity) of selected
-                                regional astrocyte subtypes.</small></p>
-                    </div>
+                <div>
+                    <img src="img/deconv.png">
+                    <p style="text-align: center;"><small>Estimated cell abundances (color intensity) of selected
+                            regional astrocyte subtypes.</small></p>
                 </div>
             </section>
 
             <section>
                 <h2>RCTD: Robust Cell Type Deconvolution</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/rctdFig2a.png">
-                        <p style="text-align: center;"><small>Illustration of the RCTD method</small></p>
-                    </div>
+                <div>
+                    <img src="img/rctdFig2a.png">
+                    <p style="text-align: center;"><small>Illustration of the RCTD method</small></p>
                 </div>
             </section>
 
@@ -196,12 +174,14 @@ presentations:
 
             <section>
                 <h3>RCTD Model</h3>
-                <pre><code class="hljs">
-\[\begin{align*}
-d_{sg}|\lambda_{sg} &\sim \text{Poisson}(y_s \lambda_{sg}) \\
-\log(\lambda_{sg}) &= \alpha_{s} + \log(\sum_f w_{sf} g_{fg}) + m_{g} + \epsilon_{sg}
-\end{align*}\]
-</code></pre>
+                <p>
+                    \[
+                    \begin{aligned}
+                    d_{sg}|\lambda_{sg} &\sim \text{Poisson}(y_s \lambda_{sg}) \\
+                    \log(\lambda_{sg}) &= \alpha_{s} + \log(\sum_f w_{sf} g_{fg}) + m_{g} + \epsilon_{sg}
+                    \end{aligned}
+                    \]
+                </p>
                 <p>Goal: estimate $w_{sf}$ with $g_{fg}$ estimated from scRNA-seq data.</p>
                 <p>Prior:</p>
                 <ul>
@@ -227,15 +207,14 @@ d_{sg}|\lambda_{sg} &\sim \text{Poisson}(y_s \lambda_{sg}) \\
                         Platform effect normalization: estimate $m_{g}$ for gene $g$ by summarizing the spatial
                         transcriptomics as a single pseudo-bulk measurement $S_g \equiv \sum_s d_{sg} \sim
                         \text{Poisson}(\bar{d}_{g})$ with
-                        <pre><code class="hljs">
-\[
-\begin{align*}
-\log(\mathbb{E}[\bar{d}_{g}]|\lambda_{.g}) &= \log\left(\frac{1}{S} \sum_s y_s \lambda_{sg}\right) \\
-&= m_{g} + \log(\bar{y}\sum_f B_{fg} g_{fg})\\
-&\approx m_{g} + \log(\bar{y}\sum_f w_{f} g_{fg}) + \log(w_0)
-\end{align*}
-\]
-</code></pre>
+                        \[
+                        \begin{aligned}
+                        \log(\mathbb{E}[\bar{d}_{g}]|\lambda_{.g}) &= \log\left(\frac{1}{S} \sum_s y_s
+                        \lambda_{sg}\right) \\
+                        &= m_{g} + \log(\bar{y}\sum_f B_{fg} g_{fg})\\
+                        &\approx m_{g} + \log(\bar{y}\sum_f w_{f} g_{fg}) + \log(w_0)
+                        \end{aligned}
+                        \]
                         where $B_{fg} = \frac{1}{S} \sum_s \frac{y_s}{\bar{y}} w_{sf} \exp(\alpha_{s}+\epsilon_{sg})$
                         and $w_{f} = \frac{1}{S} \sum_s \frac{y_s}{\bar{y}} w_{sf}\alpha_{s}$. Obtain the MLE of unknown
                         parameters ($w_{f}, w_{0}, \sigma^2_{m}$) and solve for $m_{g}$. Denote the predicted platform
@@ -275,18 +254,15 @@ d_{sg}|\lambda_{sg} &\sim \text{Poisson}(y_s \lambda_{sg}) \\
                 <h4>Cell Type Identification by Model Selection</h4>
                 <p>Denote $\mathcal{L}(f)$ as the likelihood of the model with only $f$ th cell type and $\mathcal{L}(f,
                     f')$ as the likelihood of the model only with $f$th and $f'$th cell types. For each spot $s$:</p>
-                <pre><code class="hljs">
-\[
-\hat{f} = \arg\max_f \mathcal{L}(f) \quad \text{and} \quad \hat{f'} = \arg\max_{f'\neq \hat{f}} \mathcal{L}(\hat{f}, f')
-\]
-</code></pre>
+                \[
+                \hat{f} = \arg\max_f \mathcal{L}(f) \quad \text{and} \quad \hat{f'} = \arg\max_{f'\neq \hat{f}}
+                \mathcal{L}(\hat{f}, f')
+                \]
                 <p>Because we expect many pixels to be single cell types, we can apply a <b>penalized approach similar
                         to AIC</b> to decide between the two models. We select the model maximizing:</p>
-                <pre><code class="hljs">
-\[
-\text{AIC}(\mathcal{M}) \equiv \mathcal{L}(\mathcal{M}) - V_p(\mathcal{M})
-\]
-</code></pre>
+                \[
+                \text{AIC}(\mathcal{M}) \equiv \mathcal{L}(\mathcal{M}) - V_p(\mathcal{M})
+                \]
                 <p>where $p$ represents the number of parameters (cell types) and $V$ represents the penalty weight.
                     Select $V=25$ based on simulation studies.</p>
             </section>
@@ -305,49 +281,46 @@ d_{sg}|\lambda_{sg} &\sim \text{Poisson}(y_s \lambda_{sg}) \\
                 <h4>Convert to Quadratic Programming (QP)</h4>
                 <p>The parameter $\alpha_s$ effectively allows us to re-scale $w_s$, so we define $w_{f, s}=w_{f, s}
                     e^{\alpha_s}$, which <b>will not be constrained to sum to 1</b>. Next, define:</p>
-                <pre><code class="hljs">
-\[
-\bar{\lambda}_{s, g}\left(w_s\right)=y_s \sum_{f=1}^F w_{f, s} g_{f, g} e^{\hat{m}_g}=y_s \sum_{f=1}^F w_{f, s} \bar{g}_{f, g}
-\]
-</code></pre>
+                \[
+                \bar{\lambda}_{s, g}\left(w_s\right)=y_s \sum_{f=1}^F w_{f, s} g_{f, g} e^{\hat{m}_g}=y_s \sum_{f=1}^F
+                w_{f, s} \bar{g}_{f, g}
+                \]
                 <p>We will refer to this as the predicted mean of gene $g$ in pixel $s$.</p>
             </section>
 
             <section>
                 <h4>Convert to Quadratic Programming (QP)</h4>
                 <p>The final model is a Poisson log-normal mixture model:</p>
-                <pre><code class="hljs">
-\[
-d_{s, g} \mid \bar{\lambda}_{s, g} \sim \operatorname{Poisson}\left(e^{\varepsilon_{s, g}} \bar{\lambda}_{s, g}\left(w_s\right)\right), \quad \varepsilon_{s, g} \sim \operatorname{Normal}\left(0, \sigma_{\varepsilon}^2\right)
-\]
-</code></pre>
+                \[
+                d_{s, g} \mid \bar{\lambda}_{s, g} \sim \operatorname{Poisson}\left(e^{\varepsilon_{s, g}}
+                \bar{\lambda}_{s, g}\left(w_s\right)\right), \quad \varepsilon_{s, g} \sim \operatorname{Normal}\left(0,
+                \sigma_{\varepsilon}^2\right)
+                \]
                 <p>We estimate $w_s^* \geq 0$ as the solution that maximizes the <b>log-likelihood</b>
                     $\mathcal{L}\left(w_s\right)$:</p>
-                <pre><code class="hljs">
-\[
-\max \mathcal{L}\left(w_s\right)=\sum_{g=1}^G \log P\left(d_{s, g} \mid \bar{\lambda}_{s, g}\left(w_s\right)\right) \quad \text { subject to: } w \geq 0
-\]
-</code></pre>
+                \[
+                \max \mathcal{L}\left(w_s\right)=\sum_{g=1}^G \log P\left(d_{s, g} \mid \bar{\lambda}_{s,
+                g}\left(w_s\right)\right) \quad \text { subject to: } w \geq 0
+                \]
             </section>
 
             <section>
                 <h4>Convert to Quadratic Programming (QP)</h4>
                 <p>From now on, we consider a fixed spot $s$ and suppress the notation of $s$. We will estimate $w^*
                     \geq 0$ as that which maximizes the <b>log-likelihood</b> $\mathcal{L}(w)$:</p>
-                <pre><code class="hljs">
-\[
-\max _w \mathcal{L}(w)=\sum_{g=1}^G \log P\left(d_g \mid \lambda_g(w)\right)=\sum_{g=1}^G \log Q_{d_g}\left(\lambda_g(w)\right)
-\]
-</code></pre>
+                \[
+                \max _w \mathcal{L}(w)=\sum_{g=1}^G \log P\left(d_g \mid \lambda_g(w)\right)=\sum_{g=1}^G \log
+                Q_{d_g}\left(\lambda_g(w)\right)
+                \]
                 <p>Our log likelihood is non-convex. To optimize it, we will apply Sequential Quadratic Programming, an
                     iterative procedure that will be repeated until convergence. Let $w_0$ be the value of $w$ at a
                     given iteration, and let the gradient of $-\mathcal{L}$ be $b(w)$ and the Hessian of $-\mathcal{L}$
                     be $A(w)$. Then, we can make the following quadratic Taylor approximation to $\mathcal{L}$:</p>
-                <pre><code class="hljs">
-\[
--\mathcal{L}(w) \approx-\mathcal{L}\left(w_0\right)+b\left(w_0\right)^T\left(w-w_0\right)+\frac{1}{2}\left(w-w_0\right)^T A\left(w_0\right)\left(w-w_0\right)
-\]
-</code></pre>
+                \[
+                -\mathcal{L}(w)
+                \approx-\mathcal{L}\left(w_0\right)+b\left(w_0\right)^T\left(w-w_0\right)+\frac{1}{2}\left(w-w_0\right)^T
+                A\left(w_0\right)\left(w-w_0\right)
+                \]
             </section>
 
             <section>
@@ -454,11 +427,9 @@ d_{s, g} \mid \bar{\lambda}_{s, g} \sim \operatorname{Poisson}\left(e^{\varepsil
 
             <section>
                 <h2>Cell2Location</h2>
-                <div style="align-items: center;">
-                    <div>
-                        <img src="img/c2lFig1a.png">
-                        <p style="text-align: center;"><small>Illustration of the Cell2Location method</small></p>
-                    </div>
+                <div>
+                    <img src="img/c2lFig1a.png">
+                    <p style="text-align: center;"><small>Illustration of the Cell2Location method</small></p>
                 </div>
             </section>
 
@@ -491,95 +462,72 @@ d_{s, g} \mid \bar{\lambda}_{s, g} \sim \operatorname{Poisson}\left(e^{\varepsil
             <section>
                 <h3>Cell2Location Model</h3>
                 <p><b>mRNA counts model</b></p>
-                <pre><code class="hljs">
-\[
-\begin{align*}
-d_{sg} &\sim \text{NB}(\mu_{sg}, \alpha_{eg}) \\
-\mu_{sg} &= \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
-\end{align*}
-\]
-</code></pre>
+                \[
+                \begin{aligned}
+                d_{sg} &\sim \text{NB}(\mu_{sg}, \alpha_{eg}) \\
+                \mu_{sg} &= \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
+                \end{aligned}
+                \]
                 <p><b>Gene-specific multiplicative scaling factor</b></p>
-                <pre><code class="hljs">
-\[
-\begin{align*}
-m_g &\sim \text{Gamma}\left(\alpha^m, \alpha^m/\mu^m \right) 
-\left\{ \begin{array}{ll}
-\alpha^m & = 1/(o^m)^2, \quad o^m \sim \text{Exp}(3) \\
-\mu^m &\sim \text{Gamma}(1, 1) \\
-\end{array} \right. \\
-\end{align*}
-\]
-</code></pre>
+                \[
+                \begin{aligned}
+                m_g &\sim \text{Gamma}\left(\alpha^m, \alpha^m/\mu^m \right)
+                \left\{ \begin{array}{ll}
+                \alpha^m & = 1/(o^m)^2, \quad o^m \sim \text{Exp}(3) \\
+                \mu^m &\sim \text{Gamma}(1, 1) \\
+                \end{array} \right. \\
+                \end{aligned}
+                \]
                 <p><b>The prior on detection efficiency per location</b></p>
-                <pre><code class="hljs">
-\[
-\begin{align*}
-y_s &\sim \text{Gamma}\left(\alpha^y, \alpha^y/y_e \right) \quad y_e \sim \text{Gamma}(10, 10/\mu^y)
-\end{align*}
-\]
-</code></pre>
+                \[
+                \begin{aligned}
+                y_s &\sim \text{Gamma}\left(\alpha^y, \alpha^y/y_e \right) \quad y_e \sim \text{Gamma}(10, 10/\mu^y)
+                \end{aligned}
+                \]
                 <p><b>Overdispersion for each gene</b></p>
-                <pre><code class="hljs">
-\[
-\begin{equation}
-\alpha_{eg} = 1/o_{eg}^2, \quad o_{eg} \sim \text{Exp}(\beta^o), \quad \beta^o \sim \text{Gamma}(9, 3)
-\end{equation}
-\]
-</code></pre>
+                \[
+                \alpha_{eg} = 1/o_{eg}^2, \quad o_{eg} \sim \text{Exp}(\beta^o), \quad \beta^o \sim \text{Gamma}(9, 3)
+                \]
                 <p><b>Additive shift for genes</b></p>
-                <pre><code class="hljs">
-\[
-\begin{align*}
-s_{eg} &\sim \text{Gamma}\left(\alpha^s_e, \alpha^s_e/\mu^s_e \right)
-\left\{ \begin{array}{ll}
-\mu^s_e &\sim \text{Gamma}(1, 100) \\
-\alpha^s_e &=1/o_e^2, \quad o_e \sim \text{Exp}(\beta^s), \quad \beta^s \sim \text{Gamma}(9, 3)
-\end{array} \right.
-\end{align*}
-\]
-</code></pre>
+                \[
+                \begin{aligned}
+                s_{eg} &\sim \text{Gamma}\left(\alpha^s_e, \alpha^s_e/\mu^s_e \right)
+                \left\{ \begin{array}{ll}
+                \mu^s_e &\sim \text{Gamma}(1, 100) \\
+                \alpha^s_e &=1/o_e^2, \quad o_e \sim \text{Exp}(\beta^s), \quad \beta^s \sim \text{Gamma}(9, 3)
+                \end{array} \right.
+                \end{aligned}
+                \]
                 <p><b>Cell abundance prior:</b></p>
-                <pre><code class="hljs">
-\[
-\begin{align*}
-w_{sf} &\sim \text{Gamma}\left(\sum_r z_{sr} x_{rf} \nu^w, \nu^w\right) \\
-z_{sr} &\sim \text{Gamma}\left(B_s/R, 1/(N_s/B_s)\right)
-\left\{ \begin{array}{ll}
-N_s &\sim \text{Gamma}\left(\hat{N} \nu^n, \nu^n\right) \\
-B_s &\sim \text{Gamma}\left(\hat{B}, 1\right) \\
-\end{array} \right. \\
-x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim \text{Gamma}\left(\hat{A}/\hat{B}, 1\right) \\
-\end{align*}
-\]
-</code></pre>
-                <div style="text-align:center;">
-                    <img src="img/c2lSFig1a.png" alt="SFigure 1f" style="width:90%;">
-                    <p><small></small></p>
-                    <img src="img/c2lSFig1b.png" alt="SFigure 1f" style="width:90%;">
-                    <p><small><b>SupFigure 1A</b>: Main part of the model describing spatial mRNA counts. <b>1B</b>:
-                            Additional layer of factorisation of cell type abundance prior representing similarity in
-                            cell type abundance across locations. Black box highlighting the parameters that require
-                            adaptation to a specific data set.
-                        </small></p>
-                </div>
+                \[
+                \begin{aligned}
+                w_{sf} &\sim \text{Gamma}\left(\sum_r z_{sr} x_{rf} \nu^w, \nu^w\right) \\
+                z_{sr} &\sim \text{Gamma}\left(B_s/R, 1/(N_s/B_s)\right)
+                \left\{ \begin{array}{ll}
+                N_s &\sim \text{Gamma}\left(\hat{N} \nu^n, \nu^n\right) \\
+                B_s &\sim \text{Gamma}\left(\hat{B}, 1\right) \\
+                \end{array} \right. \\
+                x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim \text{Gamma}\left(\hat{A}/\hat{B},
+                1\right) \\
+                \end{aligned}
+                \]
             </section>
 
             <section>
                 <h3>Benefits of the Cell2Location model</h3>
-                <p>Joint modelling of multiple spatial experiments/batches provides the several benefits due to
-                    normalisation and sharing of information between experiments:</p>
+                <p>Joint modelling of multiple spatial experiments/batches provides several benefits due to
+                    normalization and sharing of information between experiments:</p>
                 <ul>
-                    <li>Modelling differences in RNA detection sensitivity across experiments: $y_e$ and $y_s$.</li>
+                    <li>Modeling differences in RNA detection sensitivity across experiments: $y_e$ and $y_s$.</li>
                     <li>Increasing accuracy by improving the ability of the model to distinguish low sensitivity $m_g$
                         from zero cell abundance $w_{rf}$.</li>
-                    <li>Increasing sensitivity by sharing factorisation prior on cell abundance $w_{rf}$, namely which
+                    <li>Increasing sensitivity by sharing factorization prior on cell abundance $w_{rf}$, namely which
                         cell types tend to co-locate across experiments represented by $x_{rf}$.</li>
                 </ul>
             </section>
 
             <section>
-                <h3>Model fitting</h3>
+                <h3>Model Fitting</h3>
                 <h4>Construction of reference cell type signatures</h4>
                 <p>By default, the cell2location employs a <b>negative binomial regression</b> to estimate reference
                     cell type signatures which allows robust combination of data from multiple sources.</p>
@@ -587,24 +535,22 @@ x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim \text{Gamma}\le
                     cell type can be used.</p>
                 <h4>Determining the hyperparameters</h4>
                 <ol>
-                    <li><b>Expected cell abundance $\hat{N}$ per location:</b> A tissue-level global estimate, which can
+                    <li><b>Expected cell abundance $\hat{N}$ per location</b>: A tissue-level global estimate, which can
                         be derived from histology images (H&E or DAPI), paired to the spatial expression data $d_{s,
                         g}$, or when not available coming from the same tissue type.</li>
-                    <li><b>Hyperparameter $\alpha^y$ for regularising within-experiment variation in RNA detection
-                            sensitivity:</b> By default, we assume that the data does not have strong within-experiment
-                        variability in RNA detection sensitivity across locations $$(\alpha^y=200)$$, which results in
-                        values of $y_s$ close to the mean sensitivity for each experiment $y_e$. However, when strong
-                        gradients in mRNA detection sensitivity are observed, a common issue in human adult 10X Visium
-                        data, we recommend less strict regularisation $$(\alpha^y=20)$$ to allow normalisation of such
-                        effect and improved sensitivity.</li>
-                    <li><b>Expected detection sensitivity $\mu^y$:</b> A single global estimate which is derived from
+                    <li><b>Hyperparameter $\alpha^y$ for regularizing within-experiment variation in RNA detection
+                            sensitivity</b>: By default, we assume that the data does not have strong within-experiment
+                        variability in RNA detection sensitivity across locations $$\left(\alpha^y=200\right)$$, which
+                        results in values of $y_s$ close to the mean sensitivity for each experiment $y_e$. However,
+                        when strong gradients in mRNA detection sensitivity are observed, a common issue in human adult
+                        10X Visium data, we recommend less strict regularization $$\left(\alpha^y=20\right)$$ to allow
+                        normalization of such effect and improved sensitivity.</li>
+                    <li><b>Expected detection sensitivity $\mu^y$</b>: A single global estimate which is derived from
                         average total RNA counts observed in input spatial data $d_{s, g}$, reference cell type
                         signatures $g_{f, g}$, and the value of $\hat{N}$ as follows:
-                        <pre><code class="hljs">
-\[
-\mu^y=\frac{\frac{\sum_s \sum_g d_{s, g} / S}{\hat{N}}}{\sum_f \sum_g g_{f, g} / F}
-\]
-</code></pre>
+                        \[
+                        \mu^y=\frac{\frac{\sum_s \sum_g d_{s, g} / S}{\hat{N}}}{\sum_f \sum_g g_{f, g} / F}
+                        \]
                         where $S$ is the total number of locations and $F$ is the total number of cell types.
                     </li>
                 </ol>
@@ -615,15 +561,14 @@ x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim \text{Gamma}\le
                 <p>Variational Bayesian Inference is used to approximate the posterior, building on the Automatic
                     Differentiation Variational Inference (ADVI) framework implemented in pyro. An alternative
                     implementation in pymc3 is provided to simplify prototyping.</p>
-                <p>Briefly, within the ADVI inference framework, the posterior distribution over unknown parameters are
-                    approximated by softplus-transformed (to ensure a positive scale) univatiate normal distributions.
+                <p>Briefly, within the ADVI inference framework, the posterior distribution over unknown parameters is
+                    approximated by softplus-transformed (to ensure a positive scale) univariate normal distributions.
                     The parameters of these variational distributions are determined by minimizing the KL divergence
                     between the variational approximation and the true posterior distribution, or equivalently
                     maximizing the evidence lower bound (ELBO loss function).</p>
                 <h5>Brief Introduction to Pyro</h5>
-                <p>Here's an example to illustrate the usage of pyro for inference:</p>
+                <p>Here's an example to illustrate the use of pyro for inference:</p>
                 <pre><code class="hljs python">
-```python
 data = np.random.binomial(1, 0.8, size=200) # random generated data
 
 def model(data): # define the probabilistic model
@@ -646,13 +591,12 @@ svi = SVI(model,
 # get the learned hyperparameters
 alpha0 = pyro.param("alpha0").item()
 beta0 = pyro.param("beta0").item()
-```
-</code></pre>
-                <p>Previous code snippet demonstrates how to define a simple probabilistic model in pyro, run
-                    variational inference, and extract the learned hyperparameters. The model is a simple Beta-Bernoulli
-                    model, where the latent variable `f` is sampled from a Beta distribution and the observed data is
-                    sampled from a Bernoulli distribution. The hyperparameters of the Beta distribution are learned from
-                    the data using variational inference.</p>
+                </code></pre>
+                <p>This code snippet demonstrates how to define a simple probabilistic model in pyro, run variational
+                    inference, and extract the learned hyperparameters. The model is a simple Beta-Bernoulli model,
+                    where the latent variable <code>f</code> is sampled from a Beta distribution and the observed data
+                    is sampled from a Bernoulli distribution. The hyperparameters of the Beta distribution are learned
+                    from the data using variational inference.</p>
                 <div style="text-align:center;">
                     <img src="img/pyro_structure.svg" alt="Pyro structure" style="width:40%;">
                     <img src="img/pyro_loss.png" alt="Pyro structure" style="width:50%;">
@@ -675,8 +619,8 @@ beta0 = pyro.param("beta0").item()
             </section>
 
             <section>
-                <h3>Sensitivity analysis of Cell2Location</h3>
-                <h4>Sensitivity to the choice of hyperparameters</h4>
+                <h3>Sensitivity Analysis of Cell2Location</h3>
+                <h4>Sensitivity to the Choice of Hyperparameters</h4>
                 <p>Cell2location is sensitive to the choice of $\alpha^y$ and $\hat{N}$, but robust to $\hat{A}$ and
                     $\hat{B}$.</p>
                 <div style="text-align:center;">
@@ -685,11 +629,11 @@ beta0 = pyro.param("beta0").item()
                     <p><small><b>SupFigure 5</b>: Stability of cell2location cell abundance estimates with respect to
                             model hyperparameter settings.</small></p>
                 </div>
-                <h4>Ablation study and unaligned cell type signatures</h4>
-                <p>The factorisation of cell type abundance prior $w_{sf}$ and the gene-specific technical sensitivity
-                    scaling factor $m_g$ are crucial for the performance of cell2location. Without these factors, the
-                    performance of the model is significantly reduced under various metrics and scenarios. See SupFigure
-                    4AB.</p>
+                <h4>Ablation Study and Unaligned Cell Type Signatures</h4>
+                <p>The factorization of the cell type abundance prior $w_{sf}$ and the gene-specific technical
+                    sensitivity scaling factor $m_g$ are crucial for the performance of cell2location. Without these
+                    factors, the performance of the model is significantly reduced under various metrics and scenarios.
+                    See SupFigure 4AB.</p>
                 <div style="text-align:center;">
                     <img src="img/c2lablation.png" alt="SFigure 4" style="width:90%;">
                     <p><small><b>SupFigure 4</b>: Assessment of cell2location and alternative methods using simulated
@@ -698,8 +642,8 @@ beta0 = pyro.param("beta0").item()
                 <p>When removing fractions of cell types from the reference signatures, the performance of cell2location
                     decreases slightly, as shown in SupFigure 4C. Shown are macro-average precision-recall curves across
                     17 retained cell types, when subsampling the remaining cell types in the reference: one Ext_L25
-                    subtype removed, 48/49 retained; all excitatory layer Ext_L neurones removed, 42/49 retained; all
-                    excitatory Ext neurones removed, 31/49 retained; all neurones removed, 17/49 retained.</p>
+                    subtype removed, 48/49 retained; all excitatory layer Ext_L neurons removed, 42/49 retained; all
+                    excitatory Ext neurons removed, 31/49 retained; all neurons removed, 17/49 retained.</p>
             </section>
 
             <section>
@@ -712,21 +656,24 @@ beta0 = pyro.param("beta0").item()
 
     <script src="dist/reveal.js"></script>
     <script src="plugin/math/math.js"></script>
-    <script src="plugin/zoom/zoom.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
     <script>
         Reveal.initialize({
             controls: true,
             progress: true,
             center: true,
             hash: true,
-            plugins: [RevealZoom, RevealNotes, RevealMarkdown, RevealHighlight]
+            mathjax2: {
+                config: 'TeX-AMS_HTML-full',
+                TeX: {
+                    Macros: {
+                        R: '\\mathbb{R}',
+                        set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2]
+                    }
+                }
+            },
+            plugins: [RevealMath.MathJax2]
         });
     </script>
-
 </body>
 
 </html>
-```
