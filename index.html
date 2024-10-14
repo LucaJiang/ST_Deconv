@@ -5,7 +5,14 @@
     <meta charset="utf-8">
     <title>Deconvolution of Spatial Transcriptomics using scRNA-seq</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Deconvolution of Spatial Transcriptomics using scRNA-seq: RCTD and Cell2location">
+    <meta name="author" content="Wenxin Jiang">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/league.css" id="theme">
     <!-- <link rel="stylesheet" href="dist/theme/black.css" id="theme"> -->
@@ -923,7 +930,7 @@ svi = SVI(model,
     <link rel="stylesheet" href="plugin/highlight/github-dark.css" id="highlight-theme" />
     <script src="plugin/highlight/highlight.js"></script>
     <script src="plugin/notes/notes.js"></script>
-    <script src="node_modules/reveal.js-menu/menu.js"></script>
+    <script src="plugin/menu/menu.js"></script>
     <script>
         Reveal.initialize({
             controls: true,
@@ -952,6 +959,7 @@ svi = SVI(model,
                 hideMissingTitles: true,
             },
             plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealMenu],
+            // plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes],
         });
     </script>
 </body>
