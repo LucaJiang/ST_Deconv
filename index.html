@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Deconvolution of Spatial Transcriptomics using scRNA-seq</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/league.css" id="theme">
@@ -19,10 +20,15 @@
                 <h2>Deconvolution of Spatial Transcriptomics using scRNA-seq</h2>
                 <p style="text-align: center;">Wenxin Jiang</p>
                 <p style="text-align: center;">Oct. 18, 2024</p>
+                <aside class="notes">
+                    Note write here.
+                </aside>
             </section>
 
             <section>
-                <h2>How to use this webpage:</h2>
+                <h2>How to use this webpage</h2>
+
+                <h3>Click the button at lower left to open the menu.</h3>
 
                 <h3>Press <span style="color: paleturquoise;">esc</span> in your keyboard to navigate mode.</h3>
 
@@ -36,23 +42,23 @@
                             transcriptomics</a> and <a href="#/4">scRNA-seq</a></li>
                     <li><a href="#/7">Deconvolution methods</a>: <a href="#/8">RCTD</a> and <a
                             href="#/9">Cell2Location</a></li>
-                    <li>Simulation study and real data application</li>
+                    <li><a href="#/10">Real data application</a></li>
                 </ol>
             </section>
             <section>
                 <section data-background-image="img/FFPE_Hero_V2_RGB.webp">
                     <h2>Method of the Year: Spatially Resolved Transcriptomics</h2>
-                    <!-- <div style="align-items: center;">
-                        <div style="text-align: center;">
-                            <img src="img/FFPE_Hero_V2_RGB.webp" style="width: 80%;">
-                        </div>
-                    </div> -->
+                    <div style="position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.6em;">
+                        Press the <span style="color: gold;">DOWN</span> arrow to continue
+                    </div>
                 </section>
 
                 <section>
                     <h3>Spatial Transcriptomics Maps Gene Expression in Tissue</h3>
                     <div>
                         <img src="img/sp_gene2loc.png">
+                        <!-- <p style="text-align: center;">Spatial transcriptomics = Spatial information + gene
+                            expression</p> -->
                         <p style="text-align: center;"><small>Spatial transcriptomics combines the spatial information
                                 of tissue sections with the gene expression data from RNA sequencing.</small></p>
                     </div>
@@ -60,7 +66,7 @@
 
                 <section>
                     <h3>Example: Mouse Hippocampus in 10x Visium</h3>
-                    <table style="width: 100%; table-layout: fixed;">
+                    <!-- <table style="width: 100%; table-layout: fixed;">
                         <tr>
                             <td style="width: 60%; text-align: center;">
                                 <img src="img/sp_illu.png" alt="Image 1" style="width: 100%; height: auto;">
@@ -69,31 +75,36 @@
                             <td style="width: 60%; text-align: center;">
                                 <img src="img/sp_data.png" alt="Image 2" style="width: 40%; height: auto;">
                                 <p><small>Structure of the spatial transcriptomics
-                                        data.</small></p>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- <div style="align-items: center;">
-                        <div style="text-align: center;">
-                            <img src="img/sp_illu.png" style="width: 40%;">
-                            
+                                    data.</small></p>
+                                </td>
+                            </tr>
+                        </table> -->
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 60%; text-align: center;">
+                            <img src="img/sp_illu.png" style="width: 100%;">
+                            <p><small>Each spot may contains multiple cells or cell types</small></p>
+
                         </div>
-                        <div style="text-align: center; margin-left: -40px;">
-                            <img src="img/sp_data.png" style="width: 40%;">
-                            
+                        <div style="width: 50%; text-align: center;">
+                            <img src="img/sp_data.png" style="width: 45%; margin-left: -10%;">
+                            <p style="width: 100%; text-align: center;"><small>Gene expression matrix is highly sparse
+                                    count data</small></p>
+
                         </div>
-                    </div> -->
-                    <p style="text-align: left;"><small> Size of spots in Visium does not allow us to study gene
+                    </div>
+                    <p style="text-align: left;"><small> Size of spots in Visium does not allow us to study
+                            gene
                             expression in individual cells.
                             With mixture cell types in spots, we cannot directly map the cell types to the
                             spots.</small></p>
                 </section>
 
                 <section>
-                    <h3>Deconvolution: Mapping scRNA-seq to Spatial Transcriptomics</h3>
+                    <h3>Deconvolution</h3>
+                    <h3>Mapping scRNA-seq to Spatial Transcriptomics</h3>
                     <div>
                         <img src="img/decov_illu.png">
-                        <p style="text-align: center;"><small>Illustration of deconvolution process</small></p>
+                        <!-- <p style="text-align: center;"><small>Illustration of deconvolution process</small></p> -->
                     </div>
                     <p style="text-align: left;"><small>With the reference scRNA-seq data, we can estimate the cell type
                             composition in each spot of the spatial transcriptomics data.</small></p>
@@ -102,10 +113,12 @@
 
             <section>
                 <section>
-                    <h2>Single-Cell RNA Sequencing (scRNA-seq)</h2>
+                    <h2>Single-Cell RNA Sequencing</h2>
+                    <h3>(scRNA-seq)</h3>
                     <div>
-                        <img src="img/sc_illu.png">
-                        <p style="text-align: center;"><small>Process of scRNA-seq and its data structure</small></p>
+                        <img src="img/sc_illu.png" style="width: 70%;">
+                        <p style="text-align: center;"><small>ScRNA-seq data provides the gene expression profile of
+                                individual cells which is also sparse count data.</small></p>
                     </div>
                 </section>
 
@@ -119,7 +132,7 @@
                                 <li>Sequence depth is limited</li>
                             </ul>
                         </li>
-                        <li><b>scRNA-seq</b>:
+                        <li><b>ScRNA-seq</b>:
                             <ul>
                                 <li>Single-cell resolution</li>
                                 <li>High sequence depth</li>
@@ -168,7 +181,7 @@
                 </section>
 
                 <section>
-                    <h3>RCTD Notation Indexing:</h3>
+                    <h3>RCTD Notation of Indexing:</h3>
                     <ul>
                         <li>$s$: index of the spot in spatial transcriptomics dataset</li>
                         <li>$g$: index of the gene</li>
@@ -177,11 +190,11 @@
                 </section>
 
                 <section>
-                    <h3>RCTD Notation Dataset:</h3>
+                    <h3>RCTD Notation of Dataset:</h3>
                     <ul>
                         <b>Observed data:</b>
                         <li>$d_{sg}$: observed gene expression count in spot $s$ for gene $g$</li>
-                        <li>$y_s$: total transcript count in spot $s$</li>
+                        <li>$y_s$: total transcript count in spot $s$, equals to $\sum_g d_{sg}$</li>
                         <li>$g_{fg}$: mean gene expression for gene $g$ in cell type $f$</li>
                     </ul>
                 </section>
@@ -201,7 +214,7 @@
                 </section>
 
                 <section>
-                    <h3>RCTD Notation Dataset:</h3>
+                    <h3>RCTD Notation of Dataset:</h3>
                     <ul>
                         <b>Unknwon parameters:</b>
                         <li>$w_{sf}$: proportion of cell type $f$ in spot $s$. $\sum_f w_{sf} = 1$ and $w_{sf} \geq 0$
@@ -224,18 +237,25 @@
                 <section>
                     <h3>RCTD Model Fitting</h3>
                     <ol>
-                        <li>Estimate mean gene expression $g_{fg}$ from scRNA-seq data, denoted as $\hat{g}_{fg}$.</li>
-                        <li>Gene filtering: filter out uninformative genes based on $\hat{g}_{fg}$. Reduce to about 3k
-                            genes.</li>
+                        <li>
+                            <p><b><span style="color:darkseagreen">Estimate mean gene
+                                        expression</span></b> $g_{fg}$ from scRNA-seq data, denoted as $\hat{g}_{fg}$.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="fragment"><b><span style="color:darkseagreen">Gene filtering</span></b> filter out
+                                uninformative genes based on $\hat{g}_{fg}$. Reduce to about 3k genes.</p>
+                        </li>
                     </ol>
                 </section>
 
                 <section>
-                    <h3>RCTD Model Fitting</h3>
+                    <h4>RCTD Model Fitting</h4>
 
                     <!-- <small> -->
                     <div style="font-size: 0.6em; text-align: left;">
-                        3. Platform effect normalization: estimate $m_{g}$ for gene $g$ by summarizing the spatial
+                        3. <b><span style="color:darkseagreen">Platform effect normalization</span></b> estimate $m_{g}$
+                        for gene $g$ by summarizing the spatial
                         transcriptomics as a single pseudo-bulk measurement $S_g \equiv \sum_s d_{sg} \sim
                         \text{Poisson}(\bar{d}_{g})$ with
                         \[
@@ -258,12 +278,18 @@
                 </section>
 
                 <section>
-                    <h3>RCTD Model Fitting</h3>
+                    <h4>RCTD Model Fitting</h4>
                     <ol start="4">
-                        <li>RCTD: estimate $w_{sf}, \alpha_{s}$ and $\sigma^2_{\epsilon}$ by MLE. Assume estimated
-                            $\hat{g}_{fg}$ and $\hat{m}_{g}$ are fixed.</li>
-                        <li>Expected cell-type-specific gene expression: $\mathbb{E}[d_{sf}|w, d_{sg}] =
-                            \frac{d_{sg}w_{sf}\hat{g}_{fg}}{\sum_{f'} w_{sf'}\hat{g}_{f'g}}$.</li>
+                        <li>
+                            <p><b><span style="color:darkseagreen">Inference</span></b> estimate
+                                $w_{sf}, \alpha_{s}$ and $\sigma^2_{\epsilon}$ by MLE. Assume estimated $\hat{g}_{fg}$
+                                and $\hat{m}_{g}$ are fixed.</p>
+                        </li>
+                        <li>
+                            <p class="fragment"><b><span style="color:darkseagreen">Expected cell-type-specific gene
+                                        expression</span></b> $\mathbb{E}[d_{sf}|w, d_{sg}]
+                                =\frac{d_{sg}w_{sf}\hat{g}_{fg}}{\sum_{f'} w_{sf'}\hat{g}_{f'g}}$.</p>
+                        </li>
                     </ol>
                 </section>
 
@@ -272,7 +298,7 @@
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Doublet mode</span></b> assigns
+                                <p><b><span style="color:darkseagreen">Doublet mode</span></b> assigns
                                     1-2 cell types per spot and is recommended for technologies with high spatial
                                     resolution such as <b>Slide-seq</b> and <b>MERFISH</b>.
                                 </p>
@@ -355,7 +381,7 @@
                 </section>
 
                 <section>
-                    <h3>SQP for MLE (cont.)</h3>
+                    <h4>SQP for MLE (cont.)</h4>
                     <div style="font-size: 0.8em;">
                         <p style="text-align: left;">The final model is a Poisson log-normal mixture model:</p>
                         \[
@@ -376,7 +402,7 @@
                 </section>
 
                 <section>
-                    <h3>SQP for MLE (cont.)</h3>
+                    <h4>SQP for MLE (cont.)</h4>
                     <div style="font-size: 0.8em;">
                         <p style="text-align: left;">From now on, we consider a fixed spot $s$ and suppress the notation
                             of $s$. We will estimate
@@ -390,7 +416,7 @@
                 </section>
 
                 <section>
-                    <h3>SQP for MLE (cont.)</h3>
+                    <h4>SQP for MLE (cont.)</h4>
                     <div style="font-size: 0.8em;">
                         <p style="text-align: left;">Our log likelihood is non-convex. To optimize it, we will apply
                             Sequential Quadratic
@@ -410,6 +436,21 @@
                         \end{aligned}
                         \]
                     </div>
+                </section>
+
+                <section>
+                    <h3>SQP for MLE: Construct Positive Semi-Definite Hessian</h3>
+                    <p style="font-size: 0.8em; text-align: left;">This QP will not be well behaved if the Hessian
+                        $A\left(w_0\right)$ is not positive semi-definite, which can occur due to the non-convexity of
+                        $-\mathcal{L}(w)$. Specifically, suppose we have an eigen-decomposition of $H$ as:</p>
+                    \[
+                    H=V D V^T
+                    \]
+                    <p style="font-size: 0.8em; text-align: left;">Here, $D$ is diagonal matrix of eigenvalues. We
+                        obtain the positive semi-definite part of H by taking $D^{+}=\max (D, 0)$ and:</p>
+                    \[
+                    A=V D^{+} V^T
+                    \]
                 </section>
 
                 <section>
@@ -455,7 +496,7 @@
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Varying unique molecular
+                                <p><b><span style="color:darkseagreen">Varying unique molecular
                                             identifier (UMI) counts per pixel:</b></span> Additional UMIs per
                                     pixel led to an increased confidence rate.</p>
                             </li>
@@ -465,13 +506,16 @@
                                     proportions on
                                     pixels containing three or four cell types.</p>
                             </li>
-                            <li<p class="fragment"><b><span style="color:darkseagreen">Missing cell types in the
-                                        reference:</b></span>When cell types in the simulated spatial data were missing
-                                from the reference, RCTD classified pixels as the most transcriptionally similar cell
-                                type in the reference, if available. When no closest cell type was available in the
-                                reference, RCTD predicted cell types with reduced confidence rates but often
-                                misclassified such pixels.</p>
-                                </li>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Missing cell types in the
+                                            reference:</b></span>When cell types in the simulated spatial data were
+                                    missing
+                                    from the reference, RCTD classified pixels as the most transcriptionally similar
+                                    cell
+                                    type in the reference, if available. When no closest cell type was available in the
+                                    reference, RCTD predicted cell types with reduced confidence rates but often
+                                    misclassified such pixels.</p>
+                            </li>
                         </ul>
                     </div>
                 </section>
@@ -575,6 +619,11 @@
                 </section>
 
                 <section>
+                    <h3>Cell2Location Cell Abundance Prior</h3>
+                    <img src="img/c2lSFig1b.png" alt="SFigure 1f" style="width:90%;">
+                </section>
+
+                <section>
                     <h3>Prior Settings of Cell2Location</h3>
                     <p style="font-size: 0.8em; text-align: left;">Gene-specific multiplicative scaling factor</p>
                     <div style="font-size: 0.6em;">
@@ -642,24 +691,18 @@
                 </section>
 
                 <section>
-                    <h3>Cell2Location Model: Probabilistic Graphical</h3>
+                    <h3>Cell2Location Model: Probabilistic Graph</h3>
                     <div style="text-align:center;">
+                        <img src="img/c2l_pm.png" alt="Probabilistic Graph" style="width:90%;">
+                        <!-- <p><small></small></p> -->
 
-                        <p><small></small></p>
-                        <img src="img/c2lSFig1b.png" alt="SFigure 1f" style="width:90%;">
-                        <p><small><b>SupFigure 1A</b>: Main part of the model describing spatial mRNA counts. <b>1B</b>:
-                                Additional layer of
-                                factorisation of cell type abundance prior representing similarity in cell type
-                                abundance across locations.
-                                Black box highlighting the parameters that require adaptation to a specific data set.
-                            </small></p>
                     </div>
                 </section>
 
                 <section>
                     <h3>Strength of the Cell2Location model</h3>
                     <p style="font-size: 0.8em; text-align: left;">Joint modelling the multiple spatial
-                        experiments/batches provides several benefits due to normalization and sharing of information
+                        experiments / batches provides several benefits due to normalization and sharing of information
                         between experiments:</p>
 
                     <div style="font-size: 0.8em;">
@@ -708,7 +751,7 @@
                 </section>
 
                 <section>
-                    <h3>Fitting the cell2location model</h3>
+                    <h4>Fitting the cell2location model</h4>
                     <h4>Step 2: Determining the hyperparameters</h4>
                     <div style="font-size: 0.8em;">
                         <ul>
@@ -731,7 +774,8 @@
                 </section>
 
                 <section>
-                    <h3>Inference Cell2Location Model: Variational Inference</h3>
+                    <h4>Fitting the cell2location model</h4>
+                    <h4>Step 3: Variational Inference</h4>
                     <p style="text-align: left; font-size: 0.8em;">Variational Bayesian Inference is used to approximate
                         the posterior, building on the Automatic Differentiation Variational Inference (<scan
                             style="color:darkseagreen">ADVI</scan>) framework
@@ -750,9 +794,12 @@
                     <h3>Brief Introduction to Pyro</h3>
                     <p style="text-align: left; font-size: 0.8em;">Here's an example to illustrate the use of pyro for
                         inference:</p>
-                    <div style="font-size: 0.8em;">
-                        <pre><code data-line-numbers="5,6,8,11,13-16" class="hljs python">data = np.random.binomial(1, 0.8, size=200) # random generated data
 
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 73%; text-align: center;">
+                            <div style="font-size: 0.8em;">
+                                <pre><code data-line-numbers="5,6,8,11,13-16" class="hljs python"">data = np.random.binomial(1, 0.8, size=200) # random generated data
+                    
 def model(data): # define the probabilistic model
     # define the hyperparameters that control the Beta prior
     alpha0 = pyro.param("alpha0", torch.tensor(10.0))
@@ -764,105 +811,107 @@ def model(data): # define the probabilistic model
         pyro.sample("obs", dist.Bernoulli(f), obs=data)
 
 svi = SVI(model,
-          AutoDiagonalNormal(model),
-          Adam({"lr": 0.0005, "betas": (0.90, 0.999)}),
-          loss=Trace_ELBO())
+            AutoDiagonalNormal(model),
+            Adam({"lr": 0.0005, "betas": (0.90, 0.999)}),
+            loss=Trace_ELBO())
 
 [svi.step(data) for _ in range(1000)] # run inference
-                </code></pre>
+                                </code></pre>
+                            </div>
+                        </div>
+                        <div style="width: 30%; text-align: right; margin-left: -8em;">
+                            <img src="img/pyro_structure.svg" alt="Pyro structure" style="width: 100%;">
+                        </div>
                     </div>
                 </section>
 
-                <section>
+                <!-- <section>
                     <h3>Brief Introduction to Pyro</h3>
                     <div style="text-align:center;">
-                        <img src="img/pyro_structure.svg" alt="Pyro structure" style="width:40%;">
                         <img src="img/pyro_loss.png" alt="Pyro structure" style="width:50%;">
                         <p><small>Probabilistic model structure and loss function.</small></p>
                     </div>
-                </section>
+                </section> -->
 
                 <section>
                     <h3>Features of Cell2Location</h3>
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Borrow statistical strength
+                                <p><b><span style="color:darkseagreen">Borrow statistical strength
                                             across locations</span> with similar cell composition</b></p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Account for batch variation
-                                            across slides as well as variation in mRNA detection sensitivity</span></b>
+                                <p class="fragment">Account for <b><span style="color:darkseagreen">batch
+                                            variation</span>
+                                        across slides as well as variation in <span style="color: darkseagreen;">mRNA
+                                            detection sensitivity<span></b>
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Estimate absolute cell type
-                                            abundances by incorporating prior information about the analyzed
-                                            tissues</span></b>
+                                <p class="fragment"><b>Estimate absolute cell type abundances by incorporating <span
+                                            style="color:darkseagreen">prior information</span> about the analyzed
+                                        tissues</b>
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Computationally efficient,
-                                            owing to variational approximate inference and GPU acceleration</span></b>
+                                <p class="fragment"><b><span style="color:darkseagreen">Computationally
+                                            efficient</span>,
+                                        owing to variational approximate inference and GPU acceleration</b>
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Integrated with the
-                                            scvi-tools framework and comes with a suite of downstream analysis
-                                            tools</span></b></p>
+                                <p class="fragment"><b>Integrated with the
+                                        <span style="color:darkseagreen">scvi-tools</span> framework and comes with a
+                                        suite of downstream analysis
+                                        tools</b></p>
                             </li>
                         </ul>
                     </div>
-                    <ul>
-                        <li>Borrow statistical strength across locations with similar cell composition</li>
-                        <li>Account for batch variation across slides as well as variation in mRNA detection sensitivity
-                        </li>
-                        <li>Estimate absolute cell type abundances by incorporating prior information about the analyzed
-                            tissues</li>
-                        <li>Computationally efficient, owing to variational approximate inference and GPU acceleration
-                        </li>
-                        <li>Integrated with the scvi-tools framework and comes with a suite of <b>downstream
-                                analysis</b>
-                            tools</li>
-                    </ul>
                 </section>
 
                 <section>
                     <h3>Sensitivity Analysis of Cell2Location</h3>
-                    <h4>Sensitivity to the Choice of Hyperparameters</h4>
-                    <p>Cell2location is sensitive to the choice of $\alpha^y$ and $\hat{N}$, but robust to $\hat{A}$ and
+                    <p style="text-align: left; font-size: 0.8em;">Cell2location is sensitive to the choice of
+                        $\alpha^y$ and $\hat{N}$, but robust to $\hat{A}$ and
                         $\hat{B}$.</p>
                     <div style="text-align:center;">
                         <img src="img/c2lsena.png" alt="SFigure 5" style="width:90%;">
-                        <img src="img/c2lsenb.png" alt="SFigure 5" style="width:90%;">
-                        <p><small><b>SupFigure 5</b>: Stability of cell2location cell abundance estimates with respect
+                        <!-- <img src="img/c2lsenb.png" alt="SFigure 5" style="width:90%;"> -->
+                        <!-- <p><small><b>SupFigure 5</b>: Stability of cell2location cell abundance estimates with respect
                                 to
-                                model hyperparameter settings.</small></p>
+                                model hyperparameter settings.</small></p> -->
                     </div>
+                </section>
+
+                <section>
                     <h4>Ablation Study and Unaligned Cell Type Signatures</h4>
-                    <p>The factorization of the cell type abundance prior $w_{sf}$ and the gene-specific technical
-                        sensitivity scaling factor $m_g$ are crucial for the performance of cell2location. Without these
-                        factors, the performance of the model is significantly reduced under various metrics and
-                        scenarios.
-                        See SupFigure 4AB.</p>
-                    <div style="text-align:center;">
-                        <img src="img/c2lablation.png" alt="SFigure 4" style="width:90%;">
-                        <p><small><b>SupFigure 4</b>: Assessment of cell2location and alternative methods using
-                                simulated
-                                data.</small></p>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 70%; text-align: center;">
+                            <img src="img/c2lablation.png" alt="SFigure 4" style="width:100%;">
+                        </div>
+
+                        <div style="width: 30%; text-align: left; margin-left:-10%;">
+                            <p style="font-size: 0.6em;">The factorization of the cell type abundance prior $w_{sf}$ and
+                                the gene-specific technical sensitivity scaling factor $m_g$ are crucial.</p>
+                            <p style="font-size: 0.6em;">When removing fractions of cell types from the reference
+                                signatures, the performance of
+                                cell2location decreases slightly.</p>
+                        </div>
                     </div>
-                    <p>When removing fractions of cell types from the reference signatures, the performance of
-                        cell2location
-                        decreases slightly, as shown in SupFigure 4C. Shown are macro-average precision-recall curves
-                        across
-                        17 retained cell types, when subsampling the remaining cell types in the reference: one Ext_L25
-                        subtype removed, 48/49 retained; all excitatory layer Ext_L neurons removed, 42/49 retained; all
-                        excitatory Ext neurons removed, 31/49 retained; all neurons removed, 17/49 retained.</p>
+
                 </section>
             </section>
 
             <section>
-                <h3>References</h3>
+                <section>
+                    <h2>Comparison of RCTD and Cell2Location</h2>
+                    <h3>Real Data Analysis</h3>
+                </section>
+            </section>
+
+            <section>
+                <h4>References</h4>
                 <p>--TODO--</p>
             </section>
 
@@ -871,8 +920,10 @@ svi = SVI(model,
 
     <script src="dist/reveal.js"></script>
     <script src="plugin/math/math.js"></script>
-    <link rel="stylesheet" href="plugin/highlight/github-dark.css" />
+    <link rel="stylesheet" href="plugin/highlight/github-dark.css" id="highlight-theme" />
     <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="node_modules/reveal.js-menu/menu.js"></script>
     <script>
         Reveal.initialize({
             controls: true,
@@ -896,7 +947,11 @@ svi = SVI(model,
                     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
                 },
             },
-            plugins: [RevealMath.MathJax3, RevealHighlight],
+            menu: {
+                titleSelector: 'h1, h2, h3',
+                hideMissingTitles: true,
+            },
+            plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealMenu],
         });
     </script>
 </body>
