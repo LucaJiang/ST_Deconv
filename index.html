@@ -187,19 +187,6 @@
                 </section>
 
                 <section>
-                    <h3>RCTD Notation Dataset:</h3>
-                    <ul>
-                        <b>Unknwon parameters:</b>
-                        <li>$w_{sf}$: proportion of cell type $f$ in spot $s$. $\sum_f w_{sf} = 1$ and $w_{sf} \geq 0$
-                        </li>
-                        <li>$\lambda_{sg}$: parameter of the Poisson distribution for gene $g$ in spot $s$.</li>
-                        <li>$\alpha_{s}$: fixed pixel-specific effect for spot $s$</li>
-                        <li>$m_{g}$: gene-specific platform random effect for gene $g$</li>
-                        <li>$\epsilon_{sg}$: residual error term for gene $g$ in spot $s$</li>
-                    </ul>
-                </section>
-
-                <section>
                     <h3>RCTD Model</h3>
                     <p>
                         \[
@@ -211,6 +198,19 @@
                     </p>
                     <p style="text-align: left;">Goal: estimate $w_{sf}$ with $g_{fg}$ estimated from scRNA-seq data.
                     </p>
+                </section>
+
+                <section>
+                    <h3>RCTD Notation Dataset:</h3>
+                    <ul>
+                        <b>Unknwon parameters:</b>
+                        <li>$w_{sf}$: proportion of cell type $f$ in spot $s$. $\sum_f w_{sf} = 1$ and $w_{sf} \geq 0$
+                        </li>
+                        <li>$\lambda_{sg}$: parameter of the Poisson distribution for gene $g$ in spot $s$.</li>
+                        <li>$\alpha_{s}$: fixed pixel-specific effect for spot $s$</li>
+                        <li>$m_{g}$: gene-specific platform random effect for gene $g$</li>
+                        <li>$\epsilon_{sg}$: residual error term for gene $g$ in spot $s$</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -466,11 +466,11 @@
                                     pixels containing three or four cell types.</p>
                             </li>
                             <li<p class="fragment"><b><span style="color:darkseagreen">Missing cell types in the
-                                        reference:</b></span>When cell types in the simulated spatial
-                                data were missing from the reference, RCTD classified pixels as the most
-                                transcriptionally similar cell type in the reference, if available. When no closest cell
-                                type was available in the reference, RCTD predicted cell types with reduced confidence
-                                rates but often misclassified such pixels.</p>
+                                        reference:</b></span>When cell types in the simulated spatial data were missing
+                                from the reference, RCTD classified pixels as the most transcriptionally similar cell
+                                type in the reference, if available. When no closest cell type was available in the
+                                reference, RCTD predicted cell types with reduced confidence rates but often
+                                misclassified such pixels.</p>
                                 </li>
                         </ul>
                     </div>
@@ -511,25 +511,17 @@
                 </section>
 
                 <section>
-                    <h3>Cell2Location Notation</h3>
-                    <p><b>Index</b></p>
+                    <h3>Cell2Location Notation of Index</h3>
                     <ul>
                         <li>$g \in \{1, \ldots, G\}$: Gene</li>
                         <li>$s \in \{1, \ldots, S\}$: Spot</li>
                         <li>$e \in \{1, \ldots, E\}$: Spatial dataset</li>
                         <li>$f \in \{1, \ldots, F\}$: Cell type</li>
                     </ul>
-                    <p><b>Model parameters</b></p>
-                    <ul>
-                        <li>$d_{sg}$: Spatial expression of gene $g$ in spot $s$</li>
-                        <li>$\mu_{sg}$: Unobserved expression level (rate) of gene $g$ in spot $s$</li>
-                        <li>$\alpha_{eg}$: Gene- and batch-specific over-dispersion parameter</li>
-                        <li>$m_{g}$: Technology sensitivity parameter for gene $g$</li>
-                        <li>$w_{sf}$: Regression weight for cell type $f$ in spot $s$</li>
-                        <li>$g_{fg}$: Reference expression level of gene $g$ in cell type $f$</li>
-                        <li>$s_{eg}$: Gene-specific additive shift in spatial dataset $e$</li>
-                        <li>$y_s$: Location-specific scaling factor for spot $s$</li>
-                    </ul>
+                </section>
+
+                <section>
+                    <h3>Cell2Location Notation of Dataset</h3>
                     <p><b>Input</b>: Matrix of reference expression levels $g_{fg}$ and matrix of spatial expression
                         counts
                         $d_{sg}$.</p>
@@ -539,128 +531,227 @@
                 </section>
 
                 <section>
-                    <h3>Cell2Location Model</h3>
-                    <p><b>mRNA counts model</b></p>
-                    \[
-                    \begin{aligned}
-                    d_{sg} &\sim \text{NB}(\mu_{sg}, \alpha_{eg}) \\
-                    \mu_{sg} &= \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
-                    \end{aligned}
-                    \]
-                    <p><b>Gene-specific multiplicative scaling factor</b></p>
-                    \[
-                    \begin{aligned}
-                    m_g &\sim \text{Gamma}\left(\alpha^m, \alpha^m/\mu^m \right)
-                    \left\{ \begin{array}{ll}
-                    \alpha^m & = 1/(o^m)^2, \quad o^m \sim \text{Exp}(3) \\
-                    \mu^m &\sim \text{Gamma}(1, 1) \\
-                    \end{array} \right. \\
-                    \end{aligned}
-                    \]
-                    <p><b>The prior on detection efficiency per location</b></p>
-                    \[
-                    \begin{aligned}
-                    y_s &\sim \text{Gamma}\left(\alpha^y, \alpha^y/y_e \right) \quad y_e \sim \text{Gamma}(10, 10/\mu^y)
-                    \end{aligned}
-                    \]
-                    <p><b>Overdispersion for each gene</b></p>
-                    \[
-                    \alpha_{eg} = 1/o_{eg}^2, \quad o_{eg} \sim \text{Exp}(\beta^o), \quad \beta^o \sim \text{Gamma}(9,
-                    3)
-                    \]
-                    <p><b>Additive shift for genes</b></p>
-                    \[
-                    \begin{aligned}
-                    s_{eg} &\sim \text{Gamma}\left(\alpha^s_e, \alpha^s_e/\mu^s_e \right)
-                    \left\{ \begin{array}{ll}
-                    \mu^s_e &\sim \text{Gamma}(1, 100) \\
-                    \alpha^s_e &=1/o_e^2, \quad o_e \sim \text{Exp}(\beta^s), \quad \beta^s \sim \text{Gamma}(9, 3)
-                    \end{array} \right.
-                    \end{aligned}
-                    \]
-                    <p><b>Cell abundance prior:</b></p>
-                    \[
-                    \begin{aligned}
-                    w_{sf} &\sim \text{Gamma}\left(\sum_r z_{sr} x_{rf} \nu^w, \nu^w\right) \\
-                    z_{sr} &\sim \text{Gamma}\left(B_s/R, 1/(N_s/B_s)\right)
-                    \left\{ \begin{array}{ll}
-                    N_s &\sim \text{Gamma}\left(\hat{N} \nu^n, \nu^n\right) \\
-                    B_s &\sim \text{Gamma}\left(\hat{B}, 1\right) \\
-                    \end{array} \right. \\
-                    x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim \text{Gamma}\left(\hat{A}/\hat{B},
-                    1\right) \\
-                    \end{aligned}
-                    \]
+                    <h3>Cell2Location Model of mRNA Counts</h3>
+                    <!-- <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="width: 38%; text-align: left;">
+                            <div style="font-size: 0.8em;">
+                                \[
+                                \begin{aligned}
+                                d_{sg} &\sim \text{NB}(\mu_{sg}, \alpha_{eg}) \\
+                                \mu_{sg} &= \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
+                                \end{aligned}
+                                \]
+                            </div>
+                        </div>
+                        <div style="width: 60%; text-align: right;">
+                            <img src="img/c2lSFig1a.png" alt="SFigure 1f" style="width: 90%;">
+                        </div>
+                    </div> -->
+                    <div style="font-size: 0.8em;">
+                        \[
+                        d_{sg} \sim \text{NB}(\mu_{sg}, \alpha_{eg}), \quad
+                        \mu_{sg} = \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
+                        \]
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="img/c2lSFig1a.png" alt="SFigure 1f" style="width: 90%;">
+                    </div>
                 </section>
 
                 <section>
-                    <h3>Benefits of the Cell2Location model</h3>
-                    <p>Joint modelling of multiple spatial experiments/batches provides several benefits due to
-                        normalization and sharing of information between experiments:</p>
-                    <ul>
-                        <li>Modeling differences in RNA detection sensitivity across experiments: $y_e$ and $y_s$.</li>
-                        <li>Increasing accuracy by improving the ability of the model to distinguish low sensitivity
-                            $m_g$
-                            from zero cell abundance $w_{rf}$.</li>
-                        <li>Increasing sensitivity by sharing factorization prior on cell abundance $w_{rf}$, namely
-                            which
-                            cell types tend to co-locate across experiments represented by $x_{rf}$.</li>
-                    </ul>
+                    <p><b>Cell2Location Notation of Model parameters</b></p>
+                    <div style="font-size: 0.9em;">
+                        <ul>
+                            <li>$d_{sg}$: Spatial expression of gene $g$ in spot $s$</li>
+                            <li>$\mu_{sg}$: Unobserved expression level (rate) of gene $g$ in spot $s$</li>
+                            <li>$\alpha_{eg}$: Gene- and batch-specific over-dispersion parameter</li>
+                            <li>$m_{g}$: Technology sensitivity parameter for gene $g$</li>
+                            <li>$w_{sf}$: Regression weight for cell type $f$ in spot $s$</li>
+                            <li>$g_{fg}$: Reference expression level of gene $g$ in cell type $f$</li>
+                            <li>$s_{eg}$: Gene-specific additive shift in spatial dataset $e$</li>
+                            <li>$y_s$: Location-specific scaling factor for spot $s$</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
-                    <h3>Model Fitting</h3>
-                    <h4>Construction of reference cell type signatures</h4>
-                    <p>By default, the cell2location employs a <b>negative binomial regression</b> to estimate reference
-                        cell type signatures which allows robust combination of data from multiple sources.</p>
-                    <p>Alternatively, a <b>hand-coded method</b> that estimates the average expression of each gene in
-                        each
-                        cell type can be used.</p>
-                    <h4>Determining the hyperparameters</h4>
-                    <ol>
-                        <li><b>Expected cell abundance $\hat{N}$ per location</b>: A tissue-level global estimate, which
-                            can
-                            be derived from histology images (H&E or DAPI), paired to the spatial expression data $d_{s,
-                            g}$, or when not available coming from the same tissue type.</li>
-                        <li><b>Hyperparameter $\alpha^y$ for regularizing within-experiment variation in RNA detection
-                                sensitivity</b>: By default, we assume that the data does not have strong
-                            within-experiment
-                            variability in RNA detection sensitivity across locations $$\left(\alpha^y=200\right)$$,
-                            which
-                            results in values of $y_s$ close to the mean sensitivity for each experiment $y_e$. However,
-                            when strong gradients in mRNA detection sensitivity are observed, a common issue in human
-                            adult
-                            10X Visium data, we recommend less strict regularization $$\left(\alpha^y=20\right)$$ to
-                            allow
-                            normalization of such effect and improved sensitivity.</li>
-                        <li><b>Expected detection sensitivity $\mu^y$</b>: A single global estimate which is derived
-                            from
-                            average total RNA counts observed in input spatial data $d_{s, g}$, reference cell type
-                            signatures $g_{f, g}$, and the value of $\hat{N}$ as follows:
-                            \[
-                            \mu^y=\frac{\frac{\sum_s \sum_g d_{s, g} / S}{\hat{N}}}{\sum_f \sum_g g_{f, g} / F}
-                            \]
-                            where $S$ is the total number of locations and $F$ is the total number of cell types.
-                        </li>
-                    </ol>
+                    <h3>Prior Settings of Cell2Location</h3>
+                    <p style="font-size: 0.8em; text-align: left;">Gene-specific multiplicative scaling factor</p>
+                    <div style="font-size: 0.6em;">
+                        \[
+                        \begin{aligned}
+                        m_g &\sim \text{Gamma}\left(\alpha^m, \alpha^m/\mu^m \right)
+                        \left\{ \begin{array}{ll}
+                        \alpha^m & = 1/(o^m)^2, \quad o^m \sim \text{Exp}(3) \\
+                        \mu^m &\sim \text{Gamma}(1, 1) \\
+                        \end{array} \right. \\
+                        \end{aligned}
+                        \]
+                    </div>
+
+                    <p style="font-size: 0.8em; text-align: left;">The prior on detection efficiency per location</p>
+                    <div style="font-size: 0.6em;">
+                        \[
+                        \begin{aligned}
+                        y_s &\sim \text{Gamma}\left(\alpha^y, \alpha^y/y_e \right) \quad y_e \sim \text{Gamma}(10,
+                        10/\mu^y)
+                        \end{aligned}
+                        \]
+                    </div>
+
+                    <p style="font-size: 0.8em; text-align: left;">Overdispersion for each gene</p>
+                    <div style="font-size: 0.6em;">
+                        \[
+                        \alpha_{eg} = 1/o_{eg}^2, \quad o_{eg} \sim \text{Exp}(\beta^o), \quad \beta^o \sim
+                        \text{Gamma}(9,
+                        3)
+                        \]
+                    </div>
                 </section>
 
                 <section>
-                    <h4>Inference Cell2Location Model</h4>
-                    <p>Variational Bayesian Inference is used to approximate the posterior, building on the Automatic
-                        Differentiation Variational Inference (ADVI) framework implemented in pyro. An alternative
-                        implementation in pymc3 is provided to simplify prototyping.</p>
-                    <p>Briefly, within the ADVI inference framework, the posterior distribution over unknown parameters
-                        is
-                        approximated by softplus-transformed (to ensure a positive scale) univariate normal
-                        distributions.
-                        The parameters of these variational distributions are determined by minimizing the KL divergence
-                        between the variational approximation and the true posterior distribution, or equivalently
-                        maximizing the evidence lower bound (ELBO loss function).</p>
-                    <h5>Brief Introduction to Pyro</h5>
-                    <p>Here's an example to illustrate the use of pyro for inference:</p>
-                    <pre><code class="hljs python">
-data = np.random.binomial(1, 0.8, size=200) # random generated data
+                    <p style="font-size: 0.8em; text-align: left;">Additive shift for genes</p>
+                    <div style="font-size: 0.6em;">
+                        \[
+                        \begin{aligned}
+                        s_{eg} &\sim \text{Gamma}\left(\alpha^s_e, \alpha^s_e/\mu^s_e \right)
+                        \left\{ \begin{array}{ll}
+                        \mu^s_e &\sim \text{Gamma}(1, 100) \\
+                        \alpha^s_e &=1/o_e^2, \quad o_e \sim \text{Exp}(\beta^s), \quad \beta^s \sim \text{Gamma}(9, 3)
+                        \end{array} \right.
+                        \end{aligned}
+                        \]
+                    </div>
+
+                    <p style="font-size: 0.8em; text-align: left;">Cell abundance prior:</p>
+                    <div style="font-size: 0.6em;">
+                        \[
+                        \begin{aligned}
+                        w_{sf} &\sim \text{Gamma}\left(\sum_r z_{sr} x_{rf} \nu^w, \nu^w\right) \\
+                        z_{sr} &\sim \text{Gamma}\left(B_s/R, 1/(N_s/B_s)\right)
+                        \left\{ \begin{array}{ll}
+                        N_s &\sim \text{Gamma}\left(\hat{N} \nu^n, \nu^n\right) \\
+                        B_s &\sim \text{Gamma}\left(\hat{B}, 1\right) \\
+                        \end{array} \right. \\
+                        x_{rf} &\sim \text{Gamma}\left(K_r/R, K_r\right), \quad K_r \sim
+                        \text{Gamma}\left(\hat{A}/\hat{B},
+                        1\right) \\
+                        \end{aligned}
+                        \]
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Cell2Location Model: Probabilistic Graphical</h3>
+                    <div style="text-align:center;">
+
+                        <p><small></small></p>
+                        <img src="img/c2lSFig1b.png" alt="SFigure 1f" style="width:90%;">
+                        <p><small><b>SupFigure 1A</b>: Main part of the model describing spatial mRNA counts. <b>1B</b>:
+                                Additional layer of
+                                factorisation of cell type abundance prior representing similarity in cell type
+                                abundance across locations.
+                                Black box highlighting the parameters that require adaptation to a specific data set.
+                            </small></p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Strength of the Cell2Location model</h3>
+                    <p style="font-size: 0.8em; text-align: left;">Joint modelling the multiple spatial
+                        experiments/batches provides several benefits due to normalization and sharing of information
+                        between experiments:</p>
+
+                    <div style="font-size: 0.8em;">
+                        <ul>
+                            <li>
+                                <p class="fragment">Modeling differences in RNA detection sensitivity across
+                                    experiments: $y_e$ and $y_s$.</p>
+                            </li>
+                            <li>
+                                <p class="fragment">Increasing accuracy by improving the ability of the model to
+                                    distinguish low sensitivity
+                                    $m_g$ from zero cell abundance $w_{rf}$.</p>
+                            </li>
+                            <li>
+                                <p class="fragment">Increasing sensitivity by sharing factorization prior on cell
+                                    abundance $w_{rf}$, namely
+                                    which cell types tend to co-locate across experiments represented by $x_{rf}$.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Fitting the cell2location model</h3>
+                    <h4>Step 1: Construction of reference cell type signatures</h4>
+
+                    <div style="font-size: 0.8em;">
+                        <ul>
+                            <li>
+                                <p class="fragment">
+                                    <scan style="color:darkseagreen">Distribution</scan>: By default,
+                                    the cell2location employs a <b>negative binomial regression</b> to estimate
+                                    reference
+                                    cell type signatures which allows robust combination of data from multiple sources.
+                                </p>
+                            </li>
+                            <li>
+                                <p class="fragment">
+                                    <scan style="color:darkseagreen">Mean</scan>: Alternatively, a
+                                    <b>hand-coded method</b> that estimates the average expression of each gene in each
+                                    cell type can be used.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Fitting the cell2location model</h3>
+                    <h4>Step 2: Determining the hyperparameters</h4>
+                    <div style="font-size: 0.8em;">
+                        <ul>
+                            <li>
+                                <p class="fragment">
+                                    <scan style="color:darkseagreen">Expected cell abundance $\hat{N}$ per location
+                                    </scan>: Can be derived from histology images or tissue type.
+                                </p>
+                            </li>
+                            <li>
+                                <p class="fragment">
+                                    <scan style="color:darkseagreen">Hyperparameter $\alpha^y$ for regularizing
+                                        within-experiment variation in RNA detection sensitivity</scan>: If not strong
+                                    within-experiment variability in RNA detection sensitivity across locations, set
+                                    $\alpha^y=200$. Else, set $\alpha^y=20$.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Inference Cell2Location Model: Variational Inference</h3>
+                    <p style="text-align: left; font-size: 0.8em;">Variational Bayesian Inference is used to approximate
+                        the posterior, building on the Automatic Differentiation Variational Inference (<scan
+                            style="color:darkseagreen">ADVI</scan>) framework
+                        implemented in pyro.</p>
+                    <p style="text-align: left; font-size: 0.6em;">The posterior distribution over unknown parameters
+                        is approximated by softplus-transformed (to ensure a positive scale) <scan
+                            style="color:darkseagreen">univariate normal</scan> distributions.</p>
+                    <p style="text-align: left; font-size: 0.6em;">
+                        <scan style="color:darkseagreen">Minimizing the KL divergence</scan> between the variational
+                        approximation and the true posterior
+                        distribution (or maximizing ELBO).
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Brief Introduction to Pyro</h3>
+                    <p style="text-align: left; font-size: 0.8em;">Here's an example to illustrate the use of pyro for
+                        inference:</p>
+                    <div style="font-size: 0.8em;">
+                        <pre><code data-line-numbers="5,6,8,11,13-16" class="hljs python">data = np.random.binomial(1, 0.8, size=200) # random generated data
 
 def model(data): # define the probabilistic model
     # define the hyperparameters that control the Beta prior
@@ -678,28 +769,50 @@ svi = SVI(model,
           loss=Trace_ELBO())
 
 [svi.step(data) for _ in range(1000)] # run inference
-
-# get the learned hyperparameters
-alpha0 = pyro.param("alpha0").item()
-beta0 = pyro.param("beta0").item()
                 </code></pre>
-                    <p>This code snippet demonstrates how to define a simple probabilistic model in pyro, run
-                        variational
-                        inference, and extract the learned hyperparameters. The model is a simple Beta-Bernoulli model,
-                        where the latent variable <code>f</code> is sampled from a Beta distribution and the observed
-                        data
-                        is sampled from a Bernoulli distribution. The hyperparameters of the Beta distribution are
-                        learned
-                        from the data using variational inference.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Brief Introduction to Pyro</h3>
                     <div style="text-align:center;">
                         <img src="img/pyro_structure.svg" alt="Pyro structure" style="width:40%;">
                         <img src="img/pyro_loss.png" alt="Pyro structure" style="width:50%;">
-                        <p><small><b>Figure 1</b>: Probabilistic model structure and loss function.</small></p>
+                        <p><small>Probabilistic model structure and loss function.</small></p>
                     </div>
                 </section>
 
                 <section>
                     <h3>Features of Cell2Location</h3>
+                    <div style="font-size: 0.8em;">
+                        <ul>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Borrow statistical strength
+                                            across locations</span> with similar cell composition</b></p>
+                            </li>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Account for batch variation
+                                            across slides as well as variation in mRNA detection sensitivity</span></b>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Estimate absolute cell type
+                                            abundances by incorporating prior information about the analyzed
+                                            tissues</span></b>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Computationally efficient,
+                                            owing to variational approximate inference and GPU acceleration</span></b>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="fragment"><b><span style="color:darkseagreen">Integrated with the
+                                            scvi-tools framework and comes with a suite of downstream analysis
+                                            tools</span></b></p>
+                            </li>
+                        </ul>
+                    </div>
                     <ul>
                         <li>Borrow statistical strength across locations with similar cell composition</li>
                         <li>Account for batch variation across slides as well as variation in mRNA detection sensitivity
@@ -758,6 +871,8 @@ beta0 = pyro.param("beta0").item()
 
     <script src="dist/reveal.js"></script>
     <script src="plugin/math/math.js"></script>
+    <link rel="stylesheet" href="plugin/highlight/github-dark.css" />
+    <script src="plugin/highlight/highlight.js"></script>
     <script>
         Reveal.initialize({
             controls: true,
@@ -781,7 +896,7 @@ beta0 = pyro.param("beta0").item()
                     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
                 },
             },
-            plugins: [RevealMath.MathJax3],
+            plugins: [RevealMath.MathJax3, RevealHighlight],
         });
     </script>
 </body>
