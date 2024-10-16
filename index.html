@@ -72,6 +72,7 @@
                 </section>
 
                 <section>
+                    <!-- TODO: explain seq depth -->
                     <h3>Example: Mouse Hippocampus in 10x Visium</h3>
                     <!-- <table style="width: 100%; table-layout: fixed;">
                         <tr>
@@ -198,8 +199,8 @@
 
                 <section>
                     <h3>RCTD Notation of Dataset:</h3>
+                    <b>Observed data:</b>
                     <ul>
-                        <b>Observed data:</b>
                         <li>$d_{sg}$: observed gene expression count in spot $s$ for gene $g$</li>
                         <li>$y_s$: total transcript count in spot $s$, equals to $\sum_g d_{sg}$</li>
                         <li>$g_{fg}$: mean gene expression for gene $g$ in cell type $f$</li>
@@ -222,8 +223,8 @@
 
                 <section>
                     <h3>RCTD Notation of Dataset:</h3>
+                    <b>Unknwon parameters:</b>
                     <ul>
-                        <b>Unknwon parameters:</b>
                         <li>$w_{sf}$: proportion of cell type $f$ in spot $s$. $\sum_f w_{sf} = 1$ and $w_{sf} \geq 0$
                         </li>
                         <li>$\lambda_{sg}$: parameter of the Poisson distribution for gene $g$ in spot $s$.</li>
@@ -913,13 +914,168 @@ svi = SVI(model,
             <section>
                 <section>
                     <h2>Comparison of RCTD and Cell2Location</h2>
-                    <h3>Real Data Analysis</h3>
+                    <h3>Modelling, Inference and Simulation</h3>
+                </section>
+
+                <section>
+                    <h3>Model of RCTD and Cell2Location</h3>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 40%; text-align: center;">
+                            <p>
+                                \[d_{sg}|\lambda_{sg} \sim \text{Poisson}(y_s \lambda_{sg})\]
+                            </p>
+                            <p style="font-size: 0.8em;">
+                                \[
+                                \begin{aligned}
+                                \log(\lambda_{sg}) &= \alpha_{s} + \log(\sum_f w_{sf} g_{fg})\\
+                                &\quad + m_{g} + \epsilon_{sg}
+                                \end{aligned}
+                                \]
+                            </p>
+                            <p><small>RCTD Model</small></p>
+                        </div>
+                        <div style="width: 50%; text-align: center;">
+                            <img src="img/c2l_pm.png" alt="Probabilistic Graph" style="width:90%;">
+                            <p style="width: 100%; text-align: center;"><small>Probabilistic Graph of
+                                    Cell2Location</small></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Inference Methods</h3>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 50%; text-align: center;">
+                            <p>RCTD</p>
+                            <p>Sequential Quadratic Programming for MLE</p>
+                            <p><small>Convert nonlinear problems into a series of quadratic programming</small></p>
+                        </div>
+                        <div style="width: 50%; text-align: center;">
+                            <p>Cell2Location</p>
+                            <p>Automatic Differentiation Variational Inference</p>
+                            <p><small>Guide by AutoNormal or Encoder</small></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Programming Language and API</h3>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 50%; text-align: center;">
+                            <p>RCTD: R</p>
+                            <p>spacexr</p>
+                            <p><small>Cell type-specific differential expression with C-SIDE</small></p>
+                        </div>
+                        <div style="width: 50%; text-align: center;">
+                            <p>Cell2Location: Python</p>
+                            <p>scvi-tools / Pyro</p>
+                            <p><small>Perform many analysis tasks across single-cell, multi, and spatial omics
+                                    data, e.g., dimensionality reduction, FA, auto annotation, DE, etc.</small></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Simulation Study</h3>
+                    <div style="width: 100%; text-align: center;">
+                        <img src="img/cmp_rt.png" alt="Comparison of RCTD and Cell2Location" style="width:80%;">
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Real Data Analysis: DLPFC</h3>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 50%; text-align: center;">
+                            <p>Human DorsoLateral PreFrontal Cortex (DLPFC)</p>
+                            <ul style="font-size: 0.8em;">
+                                <li>10 adult neurotypical control</li>
+                                <li>3 position: anterior, middle , and posterior</li>
+                                <li>Annotated snRNA-seq and spatial transcriptomics</li>
+                                <li>By 10x Genomics Chromium and Visium</li>
+                            </ul>
+                        </div>
+                        <div style="width: 60%; text-align: center;">
+                            <img src="img/DLPFC.jpg" alt="dlpfc" style="width:100%;">
+                            <p style="width: 100%; text-align: center; font-size: 0.4em;">Study design to generate
+                                paired single nucleus RNA-sequencing (snRNA-seq) and spatially-resolved transcriptomic
+                                data across DLPFC.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Real Data Analysis: Data after QC</h4>
+                    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 650%; text-align: center;">
+                            <p>QC: Criteria</p>
+                            <ul style="font-size: 0.8em;">
+                                <li>Remove Cell types with less than 25 cells</li>
+                                <li>Reduce genes according to the minimum average expression and log fold change</li>
+                                <li>Remove genes appear in less than 10 spots</li>
+                                <li>Keep genes both in snRNA-seq and spatial transcriptomics</li>
+                                <li>Reduce #gene to around 3k</li>
+                            </ul>
+                        </div>
+                        <div style="width: 35%; text-align: center;">
+                            <p>Spatial Transcriptomics</p>
+                            <ul style="font-size: 0.8em;">
+                                <li>#Spot: 3639</li>
+                            </ul>
+
+                            <p>SnRNA-seq</p>
+                            <ul style="font-size: 0.8em;">
+                                <li>#Gene: about 3k</li>
+                                <li>#Cell: 2k-5k</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Real Data Analysis: Layer Level Results</h4>
+                    <div style="width: 100%; text-align: center;">
+                        <img src="img/res_layer.jpg" alt="result in layer" style="width:100%;">
+                        <p style="width: 100%; text-align: center; font-size: 0.6em;">Left pamel is layer level results
+                            of two method in paired DLPFC data. Right panel is the manual annotation.</p>
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Real Data Analysis: Cell Type Level Results</h4>
+                    <div style="width: 100%; text-align: center;">
+                        <img src="img/res_cell.jpg" alt="result in cell" style="width:100%;">
+                        <p style="width: 100%; text-align: center; font-size: 0.6em;">Cell type level results of RCTD
+                            and Cell2Location in paired DLPFC data. The manual annotation of two cell types are:
+                            Astrocytes: layer 1, Micro-Oligodendrocytes: layer 1 + white matter. Upper left is the
+                            result of deconvolution which visualizes the proportion of given cell type. Lower left is
+                            the result of mapping which assigns spots to the most likely cell type.
+                        </p>
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4>Real Data Analysis: Sub Cell Type Level Results</h4>
+                    <div style="width: 100%; text-align: center;">
+                        <img src="img/res_subcell.jpg" alt="result in cell" style="width:100%;">
+                        <p style="width: 100%; text-align: center; font-size: 0.6em;">Sub cell type level results of
+                            RCTD and Cell2Location in paired DLPFC data. The manual annotation of Excitatory Neurons 4
+                            is appear in layer 5, while Excitatory Neurons 10 is appear in layer 4.
+                        </p>
+                        </p>
+                    </div>
                 </section>
             </section>
 
             <section>
                 <h4>References</h4>
                 <p>--TODO--</p>
+                <ol>
+                    <li>
+                        111
+                    </li>
+                </ol>
             </section>
 
         </div>
