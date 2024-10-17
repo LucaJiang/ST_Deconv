@@ -47,11 +47,13 @@
                 <ol>
                     <li>Introduction to <a href="#/3">spatial
                             transcriptomics</a> and <a href="#/4">scRNA-seq</a></li>
-                    <li><a href="#/7">Deconvolution methods</a>: <a href="#/8">RCTD</a> and <a
-                            href="#/9">Cell2Location</a></li>
-                    <li><a href="#/10">Comparison</a></li>
+                    <li><a href="#/6">Deconvolution methods</a>: <a href="#/7">RCTD</a> and <a
+                            href="#/8">Cell2Location</a></li>
+                    <li><a href="#/9">Comparison</a>: <a href="#/9/4">Simulation</a> and <a href="#/9/5">Real data</a>
+                    </li>
                 </ol>
             </section>
+
             <section>
                 <section data-background-image="img/FFPE_Hero_V2_RGB.webp">
                     <h2>Method of the Year: Spatially Resolved Transcriptomics</h2>
@@ -59,6 +61,15 @@
                     <!-- <div style="position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.6em;">
                         Press the <span style="color: gold;">DOWN</span> arrow to continue
                     </div> -->
+                </section>
+
+                <section>
+                    <h3>Comparison between Sequencing Methods</h3>
+                    <div>
+                        <img src="img/spsc_complex.png">
+                        <p style="text-align: center;"><small>Understanding the complexity of tissue with bulk RNA-seq,
+                                scRNA-seq, and spatial transcriptomics.</small></p>
+                    </div>
                 </section>
 
                 <section>
@@ -148,15 +159,6 @@
                         </li>
                     </ul>
                 </section>
-            </section>
-
-            <section>
-                <h2>Summary of Sequencing Methods</h2>
-                <div>
-                    <img src="img/spsc_complex.png">
-                    <p style="text-align: center;"><small>Understanding the complexity of tissue with bulk RNA-seq,
-                            scRNA-seq, and spatial transcriptomics.</small></p>
-                </div>
             </section>
 
             <section>
@@ -834,14 +836,6 @@ svi = SVI(model,
                     </div>
                 </section>
 
-                <!-- <section>
-                    <h3>Brief Introduction to Pyro</h3>
-                    <div style="text-align:center;">
-                        <img src="img/pyro_loss.png" alt="Pyro structure" style="width:50%;">
-                        <p><small>Probabilistic model structure and loss function.</small></p>
-                    </div>
-                </section> -->
-
                 <section>
                     <h3>Features of Cell2Location</h3>
                     <div style="font-size: 0.8em;">
@@ -904,13 +898,39 @@ svi = SVI(model,
                             <p style="font-size: 0.6em;">The factorization of the cell type abundance prior $w_{sf}$ and
                                 the gene-specific technical sensitivity scaling factor $m_g$ are crucial.</p>
                             <p style="font-size: 0.6em;">When removing fractions of cell types from the reference
-                                signatures, the performance of
-                                Cell2Location decreases slightly.</p>
+                                signatures, the performance of Cell2Location decreases slightly.</p>
                         </div>
                     </div>
+                </section>
 
+                <section>
+                    <h3>Limitations and Potential Improvements</h3>
+                    <ul style="font-size: 0.8em;">
+                        <li>
+                            Limitations: high computational cost and sensitivity to hyperparameter choices.
+                        </li>
+                        <li>
+                            While Cell2Location performs excellently in simulation studies, it competes closely with
+                            RCTD in real data analysis.
+                        </li>
+                        <li>
+                            Potential improvements: deep learning accelerates tools (e.g., early stopping, learning rate
+                            scheduling, etc.) and applying amortized inference.
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Accelerating Deep Learning with PyTorch Lightning</h4>
+                    <div style=" text-align:center;">
+                        <img src="img/pl_quick_start_full_compressed.gif" alt="PyTorch Lightning" style="height: 80%;">
+                        <p><small>PyTorch Lightning simplifies deep learning code and accelerates the training
+                                process.</small></p>
+                    </div>
                 </section>
             </section>
+
+
 
             <section>
                 <section>
@@ -1129,6 +1149,10 @@ svi = SVI(model,
                         transcriptomic
                         map of the human prefrontal cortex[J]. Science, 2024, 384(6698): eadh1938.
                         <a href="https://doi.org/10.1126/science.adh1938">[link]</a>
+                    </li>
+                    <li>
+                        PyTorch Lightning. 2023.
+                        <a href="https://pytorch-lightning.readthedocs.io/en/latest/">[link]</a>
                     </li>
                 </ol>
             </section>
