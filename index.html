@@ -35,11 +35,22 @@
             <section>
                 <h2>How to Use This Webpage</h2>
 
-                <h3>Click the button at the lower left to open the menu.</h3>
-
-                <h3>Press <span style="color: paleturquoise;">esc</span> on your keyboard to enter navigation mode.</h3>
-
-                <h3>Press <span style="color: royalblue;">?</span> on your keyboard to view keyboard shortcuts.</h3>
+                <h3>Download the slides as a PDF via <a
+                        href="https://lucajiang.github.io/ST_Deconv/?print-pdf">here</a>.</h3>
+                <h3>Press <span style="color:plum "><strong>?</strong></span> on your keyboard to view
+                    shortcuts.</h3>
+                <!-- <h3>Press <span style="color: paleturquoise;">esc</span> on your keyboard to enter navigation mode.</h3> -->
+                <h3>
+                    Press <span style="color: gold;">
+                        <span class="fa fa-arrow-up"></span>
+                        <span class="fa fa-arrow-down"></span>
+                        <span class="fa fa-arrow-left"></span>
+                        <span class="fa fa-arrow-right"></span></span>
+                    on your keyboard to navigate.
+                    </span>
+                </h3>
+                <h3>Click the <span style="color:#13DAEC;">&#9776;</span> button at the lower left to open the menu.
+                </h3>
             </section>
 
             <section>
@@ -80,6 +91,18 @@
                             expression</p> -->
                         <p style="text-align: center;"><small>Spatial transcriptomics combines the spatial information
                                 of tissue sections with the gene expression data from RNA sequencing.</small></p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Mapping of Cell Types in Spatial Transcriptomics</h3>
+                    <div>
+                        <img src="img/st_map.png" style="width: 65%;">
+                        <p style="text-align: center;"><small>
+                                If there is single cell type in a spot, we can directly map the most similar cell type
+                                from the reference scRNA-seq data.
+                            </small>
+                        </p>
                     </div>
                 </section>
 
@@ -172,13 +195,37 @@
             </section>
 
             <section>
-                <h2>Deconvolution Methods</h2>
-                <div>
-                    <img src="img/deconv.png" style="width: 70%;">
-                    <p style="text-align: center;"><small>Workflow of deconvolution. Up: discovery of cell types in
-                            scRNA-seq data. Down: discovery of gene expression in spatial transcriptomics data.</small>
-                    </p>
-                </div>
+                <section>
+                    <h2>Deconvolution Methods</h2>
+                    <div>
+                        <img src="img/deconv.png" style="width: 70%;">
+                        <p style="text-align: center;"><small>Workflow of deconvolution. Up: discovery of cell types in
+                                scRNA-seq data. Down: discovery of gene expression in spatial transcriptomics
+                                data.</small>
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Commonly Used Distribution Models</h3>
+                    <div style="text-align: left; font-size: 0.8em;">
+                        <ul>
+                            <li><b>Characteristics of scRNA-seq data:</b> This data consists of count data with
+                                over-dispersion and large amount of zero.</li>
+                            <li><b>Over-dispersion:</b> The variance is greater than the mean, which is typical in count
+                                data.</li>
+                            <li><b>Assumption for spatial data:</b> Gene expression in a spot is
+                                considered the independent sum of gene expressions from different cell types.</li>
+                            <li><b>Commonly used distribution models:</b> Negative Binomial (NB), Poisson, and
+                                Zero-Inflated Negative
+                                Binomial (ZINB).</li>
+                            <li><b>Additive Property:</b> Poisson is inherently additive, while NB and ZINB are additive
+                                when the
+                                dispersion parameter is fixed.</li>
+                        </ul>
+                    </div>
+                </section>
+
             </section>
 
             <section>
@@ -923,7 +970,7 @@ svi = SVI(model,
                 <section>
                     <h4>Accelerating Deep Learning with PyTorch Lightning</h4>
                     <div style=" text-align:center;">
-                        <img src="img/pl_quick_start_full_compressed.gif" alt="PyTorch Lightning" style="height: 80%;">
+                        <img src="img/pl_quick_start_full_compressed.gif" alt="PyTorch Lightning" style="height: 75%;">
                         <p><small>PyTorch Lightning simplifies deep learning code and accelerates the training
                                 process.</small></p>
                     </div>
@@ -1112,7 +1159,7 @@ svi = SVI(model,
 
             <section>
                 <h3>References</h3>
-                <ol style="font-size: 0.6em;">
+                <ol style="font-size: 0.5em;">
                     <li>
                         Kleshchevnikov V, Shmatko A, Dann E, et al. Cell2location maps fine-grained cell types in
                         spatial
@@ -1149,6 +1196,11 @@ svi = SVI(model,
                         transcriptomic
                         map of the human prefrontal cortex[J]. Science, 2024, 384(6698): eadh1938.
                         <a href="https://doi.org/10.1126/science.adh1938">[link]</a>
+                    </li>
+                    <li>
+                        Andersson A, Bergenstråhle J, Asp M, et al. Single-cell and spatial transcriptomics enables
+                        probabilistic inference of cell type topography[J]. Communications biology, 2020, 3(1): 565. <a
+                            href="https://www.nature.com/articles/s42003-020-01247-y">[link]</a>
                     </li>
                     <li>
                         PyTorch Lightning. 2023.
