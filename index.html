@@ -37,7 +37,7 @@
 
                 <h3>Download the slides as a PDF via <a
                         href="https://lucajiang.github.io/ST_Deconv/?print-pdf">here</a>.</h3>
-                <h3>Press <span style="color:plum "><strong>?</strong></span> on your keyboard to view
+                <h3>Press <span style="color:plum;"><strong>?</strong></span> on your keyboard to view
                     shortcuts.</h3>
                 <!-- <h3>Press <span style="color: paleturquoise;">esc</span> on your keyboard to enter navigation mode.</h3> -->
                 <h3>
@@ -47,10 +47,12 @@
                         <span class="fa fa-arrow-left"></span>
                         <span class="fa fa-arrow-right"></span></span>
                     on your keyboard to navigate.
-                    </span>
                 </h3>
                 <h3>Click the <span style="color:#13DAEC;">&#9776;</span> button at the lower left to open the menu.
                 </h3>
+                <!-- <aside class="notes">
+                    Instructions on interacting with the presentation interface.
+                </aside> -->
             </section>
 
             <section>
@@ -60,18 +62,31 @@
                             transcriptomics</a> and <a href="#/4">scRNA-seq</a></li>
                     <li><a href="#/6">Deconvolution methods</a>: <a href="#/7">RCTD</a> and <a
                             href="#/8">Cell2Location</a></li>
-                    <li><a href="#/9">Comparison</a>: <a href="#/9/4">Simulation</a> and <a href="#/9/5">Real data</a>
+                    <li><a href="#/9">Comparison</a>: <a href="#/9/4">Simulation</a> and <a href="#/9/5">Real data
+                            analysis</a>
                     </li>
                 </ol>
+                <aside class="notes">
+                    First, we will provide an introduction to st and sc. Next, we will discuss deconvolution methods,
+                    focusing on two key approaches: RCTD and
+                    c2l. Finally, we will draw comparisons between these methods through both simulation
+                    studies and real data analyses.
+                </aside>
             </section>
 
             <section>
                 <section data-background-image="img/FFPE_Hero_V2_RGB.webp">
-                    <h2>Method of the Year: Spatially Resolved Transcriptomics</h2>
+                    <h2>Spatially Resolved Transcriptomics:</h2>
+                    <h2>Method of the Year 2020</h2>
                     <!-- ! unknown error in print_pdf mode -->
-                    <!-- <div style="position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.6em;">
+                    <div style="position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.6em;">
                         Press the <span style="color: gold;">DOWN</span> arrow to continue
-                    </div> -->
+                    </div>
+                    <aside class="notes">
+                        In 2020, st was recognized as the 'Method of the Year' by Nature Methods. This
+                        innovative technique bridges the gap between traditional histology and gwas analysis,
+                        offering great insights into cellular organization and function.
+                    </aside>
                 </section>
 
                 <section>
@@ -81,6 +96,22 @@
                         <p style="text-align: center;"><small>Understanding the complexity of tissue with bulk RNA-seq,
                                 scRNA-seq, and spatial transcriptomics.</small></p>
                     </div>
+                    <aside class="notes">
+                        If we draw an analogy to a fruit tart to illustrate different sequencing methods.
+                        Consider the entire tart:
+                        extracting juice from the whole tart represents bulk RNA-seq, where we obtain an average
+                        gene expression profile
+                        without distinguishing individual components. Similarly, extracting juice from each type of
+                        fruit is like ct specific bulk-seq, capturing expression from grouped cell types. Sc-RNA
+                        sequencing can be compared to
+                        examining individual pieces of fruit, as it allows us to analyze gene expression at the
+                        sc level, revealing
+                        heterogeneity within the tissue. St, on the other hand, not only provides
+                        detailed cellular
+                        composition but also maintains the spatial context, like to knowing the precise arrangement of
+                        fruit pieces in the tart,
+                        thus offering crucial spatial information in understanding tissue complexity.
+                    </aside>
                 </section>
 
                 <section>
@@ -92,53 +123,58 @@
                         <p style="text-align: center;"><small>Spatial transcriptomics combines the spatial information
                                 of tissue sections with the gene expression data from RNA sequencing.</small></p>
                     </div>
+                    <aside class="notes">
+                        St integrates gene expression with spatial information. On the sequencing platform, each spot is
+                        marked with unique
+                        barcodes, linking the sequenced mRNA to precise locations within the tissue. This allows us to
+                        accurately map gene expression data back onto the histological images, offering a clear visual
+                        representation of where specific genes are active within the tissue architecture.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Mapping of Cell Types in Spatial Transcriptomics</h3>
                     <div>
                         <img src="img/st_map.png" style="width: 65%;">
-                        <p style="text-align: center;"><small>
-                                If there is single cell type in a spot, we can directly map the most similar cell type
-                                from the reference scRNA-seq data.
-                            </small>
-                        </p>
+                        <p style="text-align: center;"><small>If there is a single cell type in a spot, we can directly
+                                map the most similar cell type from the reference scRNA-seq data.</small></p>
                     </div>
+                    <aside class="notes">
+                        When a spot contains only one single cell type, mapping is straightforward because we can
+                        directly
+                        identify the most
+                        similar cell type using reference scRNA-seq data or marker genes. However, when multiple cell
+                        types are present in a
+                        single spot—a common senario —the challenge is to determine which cell types
+                        are there and in what
+                        proportions. This is where deconvolution methods become essential.
+
+                    </aside>
                 </section>
 
                 <section>
-                    <!-- TODO: explain seq depth -->
-                    <h3>Example: Mouse Hippocampus in 10x Visium</h3>
-                    <!-- <table style="width: 100%; table-layout: fixed;">
-                        <tr>
-                            <td style="width: 60%; text-align: center;">
-                                <img src="img/sp_illu.png" alt="Image 1" style="width: 100%; height: auto;">
-                                <p><small>Example of spatial transcriptomics</small></p>
-                            </td>
-                            <td style="width: 60%; text-align: center;">
-                                <img src="img/sp_data.png" alt="Image 2" style="width: 40%; height: auto;">
-                                <p><small>Structure of the spatial transcriptomics
-                                    data.</small></p>
-                                </td>
-                            </tr>
-                        </table> -->
+                    <h3>Example: Mouse Hippocampus in 10X Visium</h3>
                     <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
                         <div style="width: 60%; text-align: center;">
                             <img src="img/sp_illu.png" style="width: 100%;">
-                            <p><small>Each spot may contain multiple cells or cell types.</small></p>
-
+                            <p><small>Each spot may encapsulate multiple cells or cell types.</small></p>
                         </div>
                         <div style="width: 50%; text-align: center;">
                             <img src="img/sp_data.png" style="width: 45%; margin-left: -10%;">
-                            <p style="width: 100%; text-align: center;"><small>Gene expression matrix is highly sparse
-                                    count data.</small></p>
-
+                            <p style="width: 100%; text-align: center;"><small>Gene expression matrix is <span
+                                        style="color: gold;">sparse</span> count data.</small></p>
                         </div>
                     </div>
                     <p style="text-align: left;"><small>The size of the spots in Visium does not allow us to study gene
                             expression in individual cells. With mixed cell types in spots, we cannot directly map the
-                            cell types to the
-                            spots.</small></p>
+                            cell types to the spots.</small></p>
+                    <aside class="notes">
+                        Here is a typical 10x Visium dataset of the mouse hippocampus. Each spot may contain around 10
+                        cells. The sequencing output is a sparse count matrix, where each row is a gene and each
+                        column is a spot. Additionally, the spatial coordinates for each spot on the
+                        tissue are known. Due to technical limitations, the sequencing depth is much lower than
+                        that of bulk RNA-seq or scRNA-seq.
+                    </aside>
                 </section>
 
                 <section>
@@ -150,6 +186,11 @@
                     </div>
                     <p style="text-align: left;"><small>With the reference scRNA-seq data, we can estimate the cell type
                             composition in each spot of the spatial transcriptomics data.</small></p>
+                    <aside class="notes">
+                        Since we want to know the cell type composition in this spot, we need to use the reference
+                        sc data to estimate the contributions of each cell type. This process is called
+                        deconvolution.
+                    </aside>
                 </section>
             </section>
 
@@ -162,6 +203,15 @@
                         <p style="text-align: center;"><small>ScRNA-seq data provides the gene expression profile of
                                 individual cells, which is also sparse count data.</small></p>
                     </div>
+                    <aside class="notes">
+                        Sc provides a detailed gene expression profile for individual cells, allowing
+                        for deeper understanding of cellular function and diversity. This data is a highly sparse count
+                        matrix,
+                        reflecting the high sequencing depth that is typically employed compared to spatial sequencing.
+                        In this matrix,
+                        each row is an individual cell, while each column corresponds to a specific gene. This setup can
+                        be used to estimate the average gene expression for each cell type.
+                    </aside>
                 </section>
 
                 <section>
@@ -181,6 +231,16 @@
                             </ul>
                         </li>
                     </ul>
+                    <aside class="notes">
+                        To sum up, st excels at providing spatial context but typically comes with
+                        lower cellular
+                        resolution and limited sequencing depth. In contrast, sc offers
+                        single-cell resolution and
+                        higher sequencing depth, allowing for more detailed insights into gene expression at the
+                        cellular level. This comparison
+                        highlights the trade-offs between the rich spatial information and the detailed
+                        cellular profiles.
+                    </aside>
                 </section>
             </section>
 
@@ -192,6 +252,17 @@
                 <p><small>ScRNA-seq and spatial transcriptomics data increase our understanding of the roles of
                         specific cell subpopulations and their interactions in development, homeostasis, and
                         disease.</small></p>
+                <aside class="notes">
+                    Deconvolution enriches our understanding of cellular roles and interactions in key biological
+                    processes. For instance,
+                    it can reveal the spatial distribution of various cell types within healthy or diseased tissues,
+                    illustrating changes in
+                    gene expression during tissue development. Additionally, it provides insights into the spatial
+                    architecture of tumors
+                    and their interactions with immune cells, highlighting the dynamic relationships that influence
+                    development,
+                    homeostasis, and progress of diseases.
+                </aside>
             </section>
 
             <section>
@@ -204,6 +275,12 @@
                                 data.</small>
                         </p>
                     </div>
+                    <aside class="notes">
+                        Then, I will introduce two deconvolution methods: RCTD and c2l. We begin by obtaining
+                        the gene-cell type matrix from sc, alongside the gene-spot matrix derived from
+                        st. The primary goal of these methods is to accurately estimate the cell type
+                        composition present in each spot of the st data.
+                    </aside>
                 </section>
 
                 <section>
@@ -211,12 +288,12 @@
                     <div style="text-align: left; font-size: 0.8em;">
                         <ul>
                             <li><b>Characteristics of scRNA-seq data:</b> This data consists of count data with
-                                over-dispersion and large amount of zero.</li>
+                                over-dispersion and large ratio of zero.</li>
                             <li><b>Over-dispersion:</b> The variance is greater than the mean, which is typical in count
                                 data.</li>
                             <li><b>Assumption for spatial data:</b> Gene expression in a spot is
                                 considered the independent sum of gene expressions from different cell types.</li>
-                            <li><b>Commonly used distribution models:</b> Negative Binomial (NB), Poisson, and
+                            <li><b>Commonly utilized distribution models:</b> Negative Binomial (NB), Poisson, and
                                 Zero-Inflated Negative
                                 Binomial (ZINB).</li>
                             <li><b>Additive Property:</b> Poisson is inherently additive, while NB and ZINB are additive
@@ -224,6 +301,18 @@
                                 dispersion parameter is fixed.</li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        Given the specific characteristics of sc and spatial data, selecting appropriate
+                        distribution models for analysis
+                        is essential. First, sc data is defined by count data that often exhibits
+                        over-dispersion, meaning the variance
+                        is greater than the mean. For spatial data, we assume that the gene expression observed in a
+                        spot represents an
+                        independent sum of gene expressions from the various cell types present. The commonly used
+                        distribution models
+                        include Poi and NB, whose additive properties are crucial for
+                        the deconvolution process
+                    </aside>
                 </section>
 
             </section>
@@ -235,15 +324,26 @@
                         <img src="img/rctdFig2a.png">
                         <p style="text-align: center;"><small>Illustration of the RCTD method</small></p>
                     </div>
+                    <aside class="notes">
+                        RCTD, which stands for Robust Cell Type Deconvolution, addresses the deconvolution challenge in
+                        a straightforward and
+                        effective manner.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>RCTD Notation of Indexing:</h3>
                     <ul>
-                        <li>$s$: index of the spot in spatial transcriptomics dataset</li>
+                        <li>$s$: index of the spot in spatial dataset</li>
                         <li>$g$: index of the gene</li>
                         <li>$f$: index of the cell type</li>
                     </ul>
+                    <aside class="notes">
+                        Now, let’s explore the notation. To align with the upcoming c2l model, I’ve
+                        adapted the original RCTD notation for this presentation, which is different from the
+                        original paper.
+                        We have s is the index of a spot, g is the index of a gene, and f is the index of a cell type.
+                    </aside>
                 </section>
 
                 <section>
@@ -254,6 +354,11 @@
                         <li>$y_s$: total transcript count in spot $s$, equals to $\sum_g d_{sg}$</li>
                         <li>$g_{fg}$: mean gene expression for gene $g$ in cell type $f$</li>
                     </ul>
+                    <aside class="notes">
+                        The observed data, or we can say input data, includes the gene expression count in spots d, the
+                        total transcript count in spots y, and the mean gene expression in cell types g. g is estimated
+                        from sc.
+                    </aside>
                 </section>
 
                 <section>
@@ -268,6 +373,16 @@
                     </p>
                     <p style="text-align: left;">Goal: estimate $w_{sf}$ with $g_{fg}$ estimated from scRNA-seq data.
                     </p>
+                    <aside class="notes">
+                        RCTD models the observed gene expression count in spots d as a Poisson distribution
+                        parameterized
+                        by the total transcript count y and the expression level lambda. The logarithm of lambda is
+                        defined by the spot-specific effect alpha, the proportion of cell type f in spot w, the mean
+                        gene
+                        expression for gene g in cell type f, the gene-specific effect m, and the error term epsilon.
+                        The
+                        primary objective is to estimate w using g obtained from scRNA-seq reference data.
+                    </aside>
                 </section>
 
                 <section>
@@ -281,6 +396,10 @@
                         <li>$m_{g}$: gene-specific platform random effect for gene $g$</li>
                         <li>$\epsilon_{sg}$: residual error term for gene $g$ in spot $s$</li>
                     </ul>
+                    <aside class="notes">
+                        Since w is the proportion of cell type, the sum of w over cell type f should be 1 and it should
+                        be non-negative.
+                    </aside>
                 </section>
 
                 <section>
@@ -289,6 +408,12 @@
                         <li>$m_{g} \sim \text{Normal}(0, \sigma^2_{m})$</li>
                         <li>$\epsilon_{sg} \sim \text{Normal}(0, \sigma^2_{\epsilon})$.</li>
                     </ul>
+                    <aside class="notes">
+                        RCTD assumes the prior distribution for the gene-specific platform random effect m is normal
+                        with
+                        mean 0 and variance sigma squared m. The residual error term epsilon is also assumed to follow a
+                        normal distribution with mean 0 and variance sigma squared epsilon.
+                    </aside>
                 </section>
 
                 <section>
@@ -300,16 +425,16 @@
                             </p>
                         </li>
                         <li>
-                            <p class="fragment"><b><span style="color:darkseagreen">Gene filtering</span></b> Filter out
-                                uninformative genes based on $\hat{g}_{fg}$. Reduce to about 3k genes.</p>
+                            <p class="fragment"><b><span style="color:darkseagreen">Gene filtering</span></b>: Filter
+                                out
+                                uninformative genes based on $\hat{g}_{fg}$. Filter to about 3k genes to reduce
+                                computational burden.</p>
                         </li>
                     </ol>
                 </section>
 
                 <section>
                     <h4>RCTD Model Fitting</h4>
-
-                    <!-- <small> -->
                     <div style="font-size: 0.6em; text-align: left;">
                         3. <b><span style="color:darkseagreen">Platform effect normalization</span></b> Estimate $m_{g}$
                         for gene $g$ by summarizing the spatial transcriptomics as a single pseudo-bulk measurement $S_g
@@ -330,8 +455,12 @@
                         Obtain the MLE of unknown parameters ($w_{f}, w_{0}, \sigma^2_{m}$) and solve for $m_{g}$.
                         Denote the predicted platform effect as $\hat{m}_{g}$.
                     </div>
-                    <!-- </small> -->
-
+                    <aside class="notes">
+                        The most important and novel step is the platform effect normalization. We estimate the gene
+                        specific platform random effect m for gene g by summarizing the st data as a
+                        single pseudo-bulk measurement. With this approximation, we can obtain the platform effect
+                        normalization term for each gene by MLE.
+                    </aside>
                 </section>
 
                 <section>
@@ -345,13 +474,22 @@
                         <li>
                             <p class="fragment"><b><span style="color:darkseagreen">Expected cell-type-specific gene
                                         expression</span></b> $\mathbb{E}[d_{sf}|w, d_{sg}]
-                                =\frac{d_{sg}w_{sf}\hat{g}_{fg}}{\sum_{f'} w_{sf'}\hat{g}_{f'g}}$.</p>
+                                =\frac{d_{sg}w_{sf}\hat{g}_{fg}}{\sum_{f'} w_{sf'}\hat{g}_{f'g}}$.
+                            </p>
                         </li>
                     </ol>
+                    <aside class="notes">
+                        By assuming that the estimated parameters are fixed, we can infer the proportions of cell types
+                        in each spot using the
+                        MLE method. These proportions represent the primary output of the deconvolution process.
+                        Additionally, we can further estimate the expected ct-specific gene expression, which
+                        allows us to identify
+                        Spatially Variable Genes associated with different cell types.
+                    </aside>
                 </section>
 
                 <section>
-                    <h3>RCTD Model Selection</h3>
+                    <h3>Three Modes of RCTD Model</h3>
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
@@ -361,25 +499,30 @@
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Full mode</span></b> Assigns any
+                                <p><b><span style="color:darkseagreen">Full mode</span></b> Assigns any
                                     number of cell types per spot and is recommended for technologies with poor spatial
                                     resolution such as <b>100-micron resolution Visium</b>.
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment"><b><span style="color:darkseagreen">Multi mode</span></b> is an
+                                <p><b><span style="color:darkseagreen">Multi mode</span></b> is an
                                     extension of doublet mode that can discover more than two cell types (up to a
                                     pre-specified amount) per spot as an alternative option to full mode.</p>
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        RCTD has three modes suitable for different spatial technologies. The doublet mode is
+                        the most commonly used mode which assigns 1-2 cell types per spot. It also can be easily
+                        extended to consider more cell types.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Cell Type Identification by Model Selection</h3>
                     <p>Denote $\mathcal{L}(f)$ as the likelihood of the model with only $f$ th cell type and
-                        $\mathcal{L}(f,
-                        f')$ as the likelihood of the model only with $f$th and $f'$th cell types. For each spot $s$:
+                        $\mathcal{L}(f, f')$ as the likelihood of the model only with $f$th and $f'$th cell types. For
+                        each spot $s$:
                     </p>
                     \[
                     \hat{f} = \arg\max_f \mathcal{L}(f) \quad \text{and} \quad \hat{f'} = \arg\max_{f'\neq \hat{f}}
@@ -387,28 +530,23 @@
                     \]
                 </section>
 
-
                 <section>
                     <h3>Cell Type Identification by Model Selection</h3>
                     <div style="font-size: 0.8em;">
-                        <p style="text-align: left;">Because we expect many pixels to be single cell types, we can apply
-                            a <b>penalized approach
-                                similar
-                                to AIC</b> to decide between the two models. We select the model maximizing:</p>
+                        <p style="text-align: left;">Because we expect many pixels to be single cell types, we can
+                            apply a <b>penalized approach similar to AIC</b> to decide between the two models. We select
+                            the model maximizing:</p>
                         \[
                         \text{AIC}(\mathcal{M}) \equiv \mathcal{L}(\mathcal{M}) - V_p(\mathcal{M})
                         \]
                         <p style="text-align: left;">where $p$ represents the number of parameters (cell types) and $V$
-                            represents the penalty
-                            weight.
-                            Select $V=25$ based on simulation studies.</p>
+                            represents the penalty weight. Select $V=25$ based on simulation studies.</p>
                     </div>
                 </section>
 
                 <section>
                     <h3>Confident and Unconfident Spots</h3>
-                    <p>Condition: Existence of another pair of cell types $(f, f')$ (f can be
-                        equal to f') such that
+                    <p>Condition: Existence of another pair of cell types $(f, f')$ (f can be equal to f') such that
                     </p>
                     \[|\mathcal{L}(\hat{f}, \hat{f'}) - \mathcal{L}(f, f')| < \delta\]</p>
                         <p style="text-align: left;">If the condition holds, the spot is <b>unconfident</b>,
@@ -417,6 +555,12 @@
                         <!-- <p style="text-align: left;">
                             The threshold $\delta$ is set to 10 based on simulation studies.
                         </p> -->
+                        <aside class="notes">
+                            We can classify spots as confident or unconfident based on the difference in likelihoods
+                            between
+                            the two models. If the difference is less than a threshold $\delta$, the spot is considered
+                            unconfident; otherwise, it is classified as confident.
+                        </aside>
                 </section>
 
                 <section>
@@ -435,6 +579,14 @@
                         <p style="text-align: left;">We will refer to this as the predicted mean of gene $g$ in pixel
                             $s$.</p>
                     </div>
+                    <aside class="notes">
+                        Sequential Quadratic Programming is a method used to solve nonlinear optimization problems by
+                        converting them into a series of quadratic programming problems. In the context of RCTD, we
+                        introduce the parameter alpha to rescale w, allowing us to define wfs as wfs times e to the
+                        power of alpha. This transformation ensures that w will not be constrained to sum to 1. We
+                        also define the predicted mean of gene g in pixel s as the sum of w times the mean gene
+                        expression times e to the power of m hat g.
+                    </aside>
                 </section>
 
                 <section>
@@ -456,20 +608,29 @@
                         g}\left(w_s\right)\right) \quad \text { subject to: } w \geq 0
                         \]
                     </div>
+                    <aside class="notes">
+                        The final model is a Poisson log-normal mixture model. We estimate w* as the
+                        solution that maximizes the log-likelihood of the model, subject to the constraint that w is
+                        non-negative.
+                    </aside>
                 </section>
 
                 <section>
                     <h4>SQP for MLE (cont.)</h4>
                     <div style="font-size: 0.8em;">
                         <p style="text-align: left;">From now on, we consider a fixed spot $s$ and suppress the notation
-                            of $s$. We will estimate
-                            $w^*
-                            \geq 0$ as that which maximizes the <b>log-likelihood</b> $\mathcal{L}(w)$:</p>
+                            of $s$. We will estimate $w^* \geq 0$ as that which maximizes the <b>log-likelihood</b>
+                            $\mathcal{L}(w)$:
+                        </p>
                         \[
                         \max _w \mathcal{L}(w)=\sum_{g=1}^G \log P\left(d_g \mid \lambda_g(w)\right)=\sum_{g=1}^G \log
                         Q_{d_g}\left(\lambda_g(w)\right)
                         \]
                     </div>
+                    <aside class="notes">
+                        We will now focus on a fixed spot s. We aim to estimate w* as the value that maximizes the
+                        log-likelihood of the model.
+                    </aside>
                 </section>
 
                 <section>
@@ -493,6 +654,11 @@
                         \end{aligned}
                         \]
                     </div>
+                    <aside class="notes">
+                        The log likelihood is non-convex, so we will use Sequential Quadratic Programming to optimize
+                        it. We use a quadratic Taylor approximation to the log likelihood to iteratively update the
+                        value of w until convergence.
+                    </aside>
                 </section>
 
                 <section>
@@ -508,6 +674,11 @@
                     \[
                     A=V D^{+} V^T
                     \]
+                    <aside class="notes">
+                        The Hessian must be positive semi-definite for the QP to be well-behaved. If the Hessian is not
+                        positive semi-definite, we can obtain the positive semi-definite part of the Hessian by taking
+                        the maximum of the eigenvalues and using this to construct a new positive semi-definite Hessian.
+                    </aside>
                 </section>
 
                 <section>
@@ -517,10 +688,14 @@
                             measurement.
                         </li>
                         <li>Robust to varying UMI counts per pixel, multiple cell types per pixel, and missing cell
-                            types
-                            in
+                            types in
                             the reference.</li>
                     </ul>
+                    <aside class="notes">
+                        RCTD has several advantages, including its ability to model platform effects by summarizing
+                        spatial transcriptomics as a pseudo-bulk measurement. It is also robust to varying UMI counts
+                        per pixel, multiple cell types per pixel, and missing cell types in the reference.
+                    </aside>
                 </section>
 
                 <section>
@@ -528,8 +703,14 @@
                     <div style="text-align:center;">
                         <img src="img/rctdFig1f.png" alt="Figure 1f" style="width:40%;">
                         <p><small>Density plot across genes of measured platform effects between cerebellum
-                                <b>scRNA-seq</b> and <b>snRNA-seq</b> data.</small></p>
+                                <b>scRNA-seq</b> and <b>snRNA-seq (single nucleus RNA-seq)</b> data.</small></p>
                     </div>
+                    <aside class="notes">
+                        Platform effect occurs when transferring cell type information from sc to st. Since we don't
+                        have the ground truth of spatial data, we can compare sc and single nucleus to estimate the
+                        platform effect. The x axis is the log ratio of the gene expression in sc and sn, and the y axis
+                        is the density. If there is no platform effect, the density should be centered around 0.
+                    </aside>
                 </section>
 
                 <section>
@@ -547,6 +728,12 @@
                                 the sc and sn cerebellum datasets. Right: Confusion matrix for RCTD’s performance on
                                 cross-platform (trained on snRNA-seq data and tested on scRNA-seq data).</small></p>
                     </div>
+                    <aside class="notes">
+                        Here we compare the measured and predicted platform effects for each gene between sc and sn
+                        cerebellum datasets. The left plot shows the scatter plot of measured versus predicted platform
+                        effects. The right plot shows the confusion matrix for RCTD's performance on cross-platform.
+                        This illustrates the effectiveness of RCTD in estimating the platform effect.
+                    </aside>
                 </section>
 
                 <section>
@@ -576,9 +763,13 @@
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        RCTD is robust to varying UMI counts per pixel, multiple cell types per pixel, and missing cell
+                        types in the reference. It can accurately predict cell class proportions
+                    </aside>
                 </section>
 
-                <section>
+                <!-- <section>
                     <h3>Application: Detecting Spatially Variable Genes and Effect of Cellular Environment</h3>
                     <p style="text-align: left; font-size: 0.8em;">Differentiate cell type marker genes from spatially
                         variable genes.</p>
@@ -588,7 +779,10 @@
                         <p><small>Smoothed spatial expression patterns, recovered by local regression, of two genes
                                 detected to have large spatial variation within RCTD’s CA3 cells.</small></p>
                     </div>
-                </section>
+                    <aside class="notes">
+                        With a robust deconvolution result, we can differentiate cell type marker genes from spatially variable genes. The plot shows the smoothed spatial expression patterns of two genes detected to have large spatial variation within RCTD's CA3 cells.
+                    </aside>
+                </section> -->
 
                 <section>
                     <h3>Limitations</h3>
@@ -600,6 +794,11 @@
                             spatial
                             data.</li>
                     </ol>
+                    <aside class="notes">
+                        RCTD has some limitations. It assumes that platform effects are shared across cell types and
+                        random noise is shared across genes. It also struggles to handle cases when the cell type is
+                        missing from the reference but exists in the spatial data.
+                    </aside>
                 </section>
             </section>
 
@@ -610,6 +809,10 @@
                         <img src="img/c2lFig1a.png">
                         <p style="text-align: center;"><small>Illustration of the Cell2Location method</small></p>
                     </div>
+                    <aside class="notes">
+                        To address the limitations of RCTD, c2l was developed with a flexible model that carefully
+                        models different sources of variation in st data.
+                    </aside>
                 </section>
 
                 <section>
@@ -620,6 +823,11 @@
                         <li>$e \in \{1, \ldots, E\}$: Spatial dataset</li>
                         <li>$f \in \{1, \ldots, F\}$: Cell type</li>
                     </ul>
+                    <aside class="notes">
+                        Still, g is the index of a gene, s is the index of a spot and f is the index of a cell type.
+                        Different from RCTD, c2l can handle multiple spatial datasets. We use e to index the different
+                        spatial experiments.
+                    </aside>
                 </section>
 
                 <section>
@@ -627,28 +835,19 @@
                     <p><b>Input</b>: Matrix of reference expression levels $g_{fg}$ and matrix of spatial expression
                         counts
                         $d_{sg}$.</p>
-                    <p><b>Main output</b>: Regression weights $w_{sf}$ which can be transformed into cell type
+                    <p><b>Main output</b>: Cell abundance $w_{sf}$ which can be transformed into cell type
                         proportions.
                     </p>
+                    <aside class="notes">
+                        The input data includes the matrix of reference expression levels g and the matrix of spatial
+                        expression counts d. The primary output is the cell abundance w, which can be transformed
+                        into cell type proportions. Here, we do not assume that the sum of w over cell type f is 1,
+                        that's why we call it cell abundance.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Cell2Location Model of mRNA Counts</h3>
-                    <!-- <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="width: 38%; text-align: left;">
-                            <div style="font-size: 0.8em;">
-                                \[
-                                \begin{aligned}
-                                d_{sg} &\sim \text{NB}(\mu_{sg}, \alpha_{eg}) \\
-                                \mu_{sg} &= \left( m_{g} \sum_{f} w_{sf} g_{fg} + s_{eg} \right) y_s
-                                \end{aligned}
-                                \]
-                            </div>
-                        </div>
-                        <div style="width: 60%; text-align: right;">
-                            <img src="img/c2lSFig1a.png" alt="SFigure 1f" style="width: 90%;">
-                        </div>
-                    </div> -->
                     <div style="font-size: 0.8em;">
                         \[
                         d_{sg} \sim \text{NB}(\mu_{sg}, \alpha_{eg}), \quad
@@ -658,6 +857,14 @@
                     <div style="text-align: center;">
                         <img src="img/c2lSFig1a.png" alt="SFigure 1f" style="width: 90%;">
                     </div>
+                    <aside class="notes">
+                        c2l model d as a negative binomial distribution with mean mu and overdispersion parameter alpha
+                        which is flexible than Poisson distribution in RCTD. The mean mu is defined by the technology
+                        sensitivity parameter m, the regression weights w, the reference expression levels g, the
+                        gene-specific additive shift s, and the location-specific scaling factor y. The figure shows the
+                        probabilistic graphical model. The most important part is that c2l factorizes the cell abundance
+                        prior into two parts.
+                    </aside>
                 </section>
 
                 <section>
@@ -674,11 +881,22 @@
                             <li>$y_s$: Location-specific scaling factor for spot $s$</li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        SKIP.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Cell2Location Cell Abundance Prior</h3>
                     <img src="img/c2lSFig1b.png" alt="SFigure 1f" style="width:90%;">
+                    <aside class="notes">
+                        c2l factorizes the cell abundance prior into x and z by assuming there are several colocated
+                        ct latent group r for each ct. This concept can be visualized as a two-dimensional clustering
+                        that
+                        relates to both ct and spatial location.
+                        Within each latent group, the ct are assumed to have similar spatial distributions,
+                        while the spots within these groups are expected to exhibit similar ct compositions.
+                    </aside>
                 </section>
 
                 <section>
@@ -714,6 +932,10 @@
                         3)
                         \]
                     </div>
+                    <aside class="notes">
+                        Most of the priors are set as gamma distributions which is the conjugate prior for the
+                        negative binomial distribution.
+                    </aside>
                 </section>
 
                 <section>
@@ -746,41 +968,51 @@
                         \end{aligned}
                         \]
                     </div>
+                    <aside class="notes">
+                        SKIP
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Cell2Location Model: Probabilistic Graph</h3>
                     <div style="text-align:center;">
                         <img src="img/c2l_pm.png" alt="Probabilistic Graph" style="width:85%;">
-                        <!-- <p><small></small></p> -->
-
                     </div>
+                    <aside class="notes">
+                        Combining the prior settings, we can construct the probabilistic graph of the c2l model.
+                        The hyperparameters colored in grey have default values while the hyperparameters colored in
+                        black are obtained from the data.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Strength of the Cell2Location Model</h3>
                     <p style="font-size: 0.8em; text-align: left;">Joint modeling of multiple spatial
-                        experiments/batches provides several benefits due to normalization and sharing of information
+                        experiments / batches provides several benefits due to normalization and sharing of information
                         between experiments:</p>
 
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment">Modeling differences in RNA detection sensitivity across
+                                <p>Modeling differences in RNA detection sensitivity across
                                     experiments: $y_e$ and $y_s$.</p>
                             </li>
                             <li>
-                                <p class="fragment">Increasing accuracy by improving the model's ability to
+                                <p>Increasing accuracy by improving the model's ability to
                                     distinguish low sensitivity
                                     $m_g$ from zero cell abundance $w_{rf}$.</p>
                             </li>
                             <li>
-                                <p class="fragment">Increasing sensitivity by sharing factorization prior on cell
+                                <p>Increasing sensitivity by sharing factorization prior on cell
                                     abundance $w_{rf}$, namely
                                     which cell types tend to co-locate across experiments represented by $x_{rf}$.</p>
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        c2l are able to model multiple spatial experiments simultaneously, which provides more robust
+                        estimation.
+                    </aside>
                 </section>
 
                 <section>
@@ -790,15 +1022,16 @@
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment">
+                                <p>
                                     <scan style="color:darkseagreen">Distribution</scan>: By default,
                                     the Cell2Location employs a <b>negative binomial regression</b> to estimate
-                                    reference
-                                    cell type signatures, which allows robust combination of data from multiple sources.
+                                    reference cell type signatures, which allows robust combination of data from
+                                    multiple
+                                    sources.
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment">
+                                <p>
                                     <scan style="color:darkseagreen">Mean</scan>: Alternatively, a
                                     <b>hand-coded method</b> that estimates the average expression of each gene in each
                                     cell type can be used.
@@ -806,6 +1039,11 @@
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        Similar to RCTD, the first step is to construct reference cell type signatures. However, c2l
+                        provides an alternative method to model the distribution of reference ct as a negative binomial
+                        distribution. This result in a realistic modeling of the data.
+                    </aside>
                 </section>
 
                 <section>
@@ -814,13 +1052,13 @@
                     <div style="font-size: 0.8em;">
                         <ul>
                             <li>
-                                <p class="fragment">
+                                <p>
                                     <scan style="color:darkseagreen">Expected cell abundance $\hat{N}$ per location
                                     </scan>: Can be derived from histology images or tissue type.
                                 </p>
                             </li>
                             <li>
-                                <p class="fragment">
+                                <p>
                                     <scan style="color:darkseagreen">Hyperparameter $\alpha^y$ for regularizing
                                         within-experiment variation in RNA detection sensitivity</scan>: If not strong
                                     within-experiment variability in RNA detection sensitivity across locations, set
@@ -829,6 +1067,11 @@
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        There are 2 hyperparameters that need to be determined before fitting the model. The expected
+                        cell abundance per location can be derived from histology images or tissue type. The
+                        hyperparameter alpha y is determined based on spatial platform characteristics.
+                    </aside>
                 </section>
 
                 <section>
@@ -846,6 +1089,11 @@
                         approximation and the true posterior
                         distribution (or maximizing ELBO).
                     </p>
+                    <aside class="notes">
+                        The prior settings of c2l is too complex, which makes it hard to derive the posterior
+                        distribution with vi. Here we use ADVI frame work implemented in Pyro to approximate each
+                        posterior as a univariate normal distribution.
+                    </aside>
                 </section>
 
                 <section>
@@ -881,6 +1129,18 @@ svi = SVI(model,
                             <img src="img/pyro_structure.svg" alt="Pyro structure" style="width: 100%;">
                         </div>
                     </div>
+                    <aside class="notes">
+                        Here is an example of how to use Pyro for inference. We first generate some random data and
+                        define the probabilistic model. The latent variable is sampled from the Beta prior with
+                        parameters
+                        alpha0 and beta0. The observed data is sampled from the Bernoulli likelihood with the latent
+                        variable as the parameter. We then use the SVI class to perform inference using the
+                        AutoDiagonalNormal
+                        guide which approximates the posterior as a univariate normal distribution. We use the Adam
+                        optimizer
+                        to minimize the ELBO loss function. The usage of Pyro makes it easy to define complex
+                        probabilistic models.
+                    </aside>
                 </section>
 
                 <section>
@@ -918,6 +1178,12 @@ svi = SVI(model,
                             </li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        To summarize, c2l has several advantages, including the ability to borrow statistical strength
+                        across locations with similar cell composition, account for batch variation and mRNA detection
+                        sensitivity, estimate absolute cell type abundances, computational efficiency, and integration
+                        with the scvi-tools framework, providing access to a suite of downstream analysis tools.
+                    </aside>
                 </section>
 
                 <section>
@@ -932,6 +1198,10 @@ svi = SVI(model,
                                 to
                                 model hyperparameter settings.</small></p> -->
                     </div>
+                    <aside class="notes">
+                        c2l is sensitive to the choice of alpha y and hat N but robust to hat A: the expected number of
+                        cell types per location and hat B: the expected group size of locations.
+                    </aside>
                 </section>
 
                 <section>
@@ -948,6 +1218,9 @@ svi = SVI(model,
                                 signatures, the performance of Cell2Location decreases slightly.</p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        Results of ablation study showing importance of ...
+                    </aside>
                 </section>
 
                 <section>
@@ -965,6 +1238,12 @@ svi = SVI(model,
                             scheduling, etc.) and applying amortized inference.
                         </li>
                     </ul>
+                    <aside class="notes">
+                        However, c2l has some limitations, including high computational cost and sensitivity to
+                        hyperparameter choices. While c2l performs well in simulation studies, it competes closely with
+                        RCTD in real data analysis. Potential improvements include using deep learning to accelerate
+                        the training process and applying amortized inference.
+                    </aside>
                 </section>
 
                 <section>
@@ -974,15 +1253,25 @@ svi = SVI(model,
                         <p><small>PyTorch Lightning simplifies deep learning code and accelerates the training
                                 process.</small></p>
                     </div>
+                    <aside class="notes">
+                        Here we introduce pl, a lightweight PyTorch wrapper that simplifies deep learning
+                        code and accelerates the training process. It provides a high-level interface for PyTorch and
+                        automates the training loop, allowing users to focus on the research rather than the
+                        implementation details.
+                        Although c2l import pl when importing scvi-tools, it does not use pl to accelerate the
+                        training process.
+                    </aside>
                 </section>
             </section>
-
-
 
             <section>
                 <section>
                     <h2>Comparison of RCTD and Cell2Location</h2>
                     <h3>Modeling, Inference, and Simulation</h3>
+                    <aside class="notes">
+                        Finally, the last section compares RCTD and Cell2Location in terms of modeling, inference, and
+                        simulation.
+                    </aside>
                 </section>
 
                 <section>
@@ -1008,6 +1297,10 @@ svi = SVI(model,
                                     Cell2Location</small></p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        The basic model is similar because the nb can be view as gamma-poisson mixture. The
+                        difference is that c2l has a more complex prior setting.
+                    </aside>
                 </section>
 
                 <section>
@@ -1024,6 +1317,10 @@ svi = SVI(model,
                             <p><small>Guide by AutoNormal or Encoder</small></p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        The inference process of RCTD is generally simpler and faster compared to c2l, enabling quicker
+                        results in many analyses.
+                    </aside>
                 </section>
 
                 <section>
@@ -1041,6 +1338,13 @@ svi = SVI(model,
                                     data, e.g., dimensionality reduction, FA, auto-annotation, DE, etc.</small></p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        c2l is build on top of scvi-tools which is a comprehensive toolkit for single-cell data
+                        analysis.
+                        I believe that the choice of API plays a crucial role in the ease of use and availability of
+                        downstream analyses. These
+                        two factors are vital for the broader adoption of a method within the research community.
+                    </aside>
                 </section>
 
                 <section>
@@ -1048,6 +1352,10 @@ svi = SVI(model,
                     <div style="width: 100%; text-align: center;">
                         <img src="img/cmp_rt.png" alt="Comparison of RCTD and Cell2Location" style="width:80%;">
                     </div>
+                    <aside class="notes">
+                        From the simulation study, we can see that c2l outperforms RCTD in many scenarios. But c2l is
+                        more computationally expensive.
+                    </aside>
                 </section>
 
                 <section>
@@ -1069,6 +1377,10 @@ svi = SVI(model,
                                 data across DLPFC.</p>
                         </div>
                     </div>
+                    <aside class="notes">
+                        We use the DLPFC data from 10X Genomics to compare the performance of RCTD and c2l. The ground
+                        truth of st is annotated manually.
+                    </aside>
                 </section>
 
                 <section>
@@ -1097,6 +1409,9 @@ svi = SVI(model,
                             </ul>
                         </div>
                     </div>
+                    <aside class="notes">
+                        We perform qc and result in 3639 spots and 3k genes in snRNA-seq.
+                    </aside>
                 </section>
 
                 <section>
@@ -1108,6 +1423,14 @@ svi = SVI(model,
                             of two methods in paired DLPFC data. Right panel shows the manual annotation.</p>
                         </p>
                     </div>
+                    <aside class="notes">
+                        Left panel shows layer level results of two methods in paired DLPFC data. Right panel shows the
+                        manual annotation. We can see that c2l provides smoother and less noisy results. But since the
+                        paper
+                        of c2l suggests to use about 40k epochs and I only use 3k, the result of c2l may not converge
+                        which can be seen
+                        in the figure that most of the region has small values.
+                    </aside>
                 </section>
 
                 <section>
@@ -1123,6 +1446,13 @@ svi = SVI(model,
                         </p>
                         </p>
                     </div>
+                    <aside class="notes">
+                        The cell type level results of RCTD and Cell2Location in paired DLPFC data. Manual annotation of
+                        two cell types: Astrocytes in layer 1, Micro-Oligodendrocytes in layer 1 as well as white
+                        matter.
+                        Upper left shows the result of deconvolution visualizing the proportion of a given cell type.
+                        Lower left shows the result of mapping assigning spots to the most likely cell type.
+                    </aside>
                 </section>
 
                 <!-- <section>
@@ -1153,13 +1483,16 @@ svi = SVI(model,
                                 which may enhance its performance.</li>
                         </ul>
                     </div>
+                    <aside class="notes">
+                        .
+                    </aside>
                 </section>
 
             </section>
 
             <section>
                 <h3>References</h3>
-                <ol style="font-size: 0.5em;">
+                <ol style="font-size: 0.6em;">
                     <li>
                         Kleshchevnikov V, Shmatko A, Dann E, et al. Cell2location maps fine-grained cell types in
                         spatial
@@ -1175,13 +1508,21 @@ svi = SVI(model,
                         Marx, V. Method of the Year: spatially resolved transcriptomics. Nat Methods 18, 9–14 (2021).
                         <a href="https://doi.org/10.1038/s41592-020-01033-y">[link]</a>
                     </li>
+                    <li>Understanding Complexity. Luciano Martelotto. Twitter. 2023.
+                        <a href="https://twitter.com/LGMartelotto/status/1186745128615985152">[link]</a>
+                    </li>
                     <li>
                         Li B, Zhang W, Guo C, et al. Benchmarking spatial and single-cell transcriptomics integration
                         methods
                         for transcript distribution prediction and cell type deconvolution[J]. Nature methods, 2022,
                         19(6):
-                        662-670.
+                        662-670. <a href="https://www.nature.com/articles/s41592-022-01480-9">[link]</a>
                     </li>
+                    <li>
+                        Longo S K, Guo M G, Ji A L, et al. Integrating single-cell and spatial transcriptomics to
+                        elucidate intercellular tissue
+                        dynamics[J]. Nature Reviews Genetics, 2021, 22(10): 627-644.
+                        <a href="https://www.nature.com/articles/s41576-021-00370-8">[link]</a>
                     <li>
                         Integrating Single Cell and Visium Spatial Gene Expression Data. 10x Genomics. 2023.
                         <a
@@ -1191,6 +1532,12 @@ svi = SVI(model,
                         Spatial Decomposition. Open Problems in Single-Cell Analysis. 2023.
                         <a href="https://openproblems.bio/results/spatial_decomposition/">[link]</a>
                     </li>
+                </ol>
+            </section>
+
+            <section>
+                <p style="font-size: 1.2em; text-align: center;"><strong>References</strong></p>
+                <ol style="font-size: 0.6em;" start="9">
                     <li>
                         Huuki-Myers L A, Spangler A, Eagles N J, et al. A data-driven single-cell and spatial
                         transcriptomic
